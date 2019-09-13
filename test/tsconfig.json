@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": true,
+      "module": "es6",
+      "target": "es5",
+      "jsx": "react",
+      "allowJs": false
+    },
+    "include": [
+      "../test/**/*.test.ts"
+    ],
+    "exclude": [
+      "node_modules/**/*",
+      "src/**/*",
+      "dist/**/*",
+      "**/*.js"
+    ]
+  }

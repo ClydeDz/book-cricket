@@ -1,0 +1,8 @@
+@import "./abstract/variables";
+
+body {
+    background-color: $one; 
+    color: black;
+    font-size: 150px;
+    transition: all ease 0.5s
+}
