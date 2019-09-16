@@ -7,7 +7,7 @@
     "build:dev": "SET NODE_ENV=local && webpack --config webpack.dev.js",
     "start:dev": "SET NODE_ENV=development && webpack-dev-server --config ./webpack.dev.js --hot --inline && webpack --config webpack.dev.js --watch",
     "build:prod": "SET NODE_ENV=production && webpack --config webpack.prod.js",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:coverage": "jest --coverage"
   },
   "author": "Clyde D'Souza",
