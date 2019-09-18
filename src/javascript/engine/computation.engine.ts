@@ -4,6 +4,10 @@ export class ComputationEngine {
         return Math.trunc(balls/6) + ((balls % 6) / 10);
     }
 
+    oversToBalls(overs: number): number {
+        return Math.trunc(overs) * 6 + ((overs % 1) * 10);
+    }
+
     runRate(runs: number, overs: number): number {
         return runs/overs;
     }
@@ -17,11 +21,16 @@ export class ComputationEngine {
     }
 
     getProjectedScore(runsMade: number, oversPlayed: number, currentRunRate: number, totalOvers: number): number {
-        return (currentRunRate * (totalOvers - oversPlayed)) + runsMade;
+        let ballsRemaining: number = this.oversToBalls(totalOvers) - this.oversToBalls(oversPlayed);
+        let oversRemaining = this.ballsToOvers(ballsRemaining);
+        return (currentRunRate * oversRemaining) + runsMade;
     }
 
     getRequiredRunRate(runsMade: number, oversPlayed: number, targetRuns: number, totalOvers: number): number{
-        return this.runRate((targetRuns - runsMade), (totalOvers - oversPlayed));
+        let runsRemaining: number = targetRuns - runsMade;
+        let ballsRemaining: number = this.oversToBalls(totalOvers) - this.oversToBalls(oversPlayed);
+        let requiredRR: number = (runsRemaining / ballsRemaining) * 6;
+        return Math.round(requiredRR * 100) / 100;
     }
 
     getBattingStrikeRate(runsMade: number, ballsPlayed: number): number {
