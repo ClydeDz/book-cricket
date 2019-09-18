@@ -22,7 +22,7 @@ export class ComputationEngine {
 
     getProjectedScore(runsMade: number, oversPlayed: number, currentRunRate: number, totalOvers: number): number {
         let ballsRemaining: number = this.oversToBalls(totalOvers) - this.oversToBalls(oversPlayed);
-        let oversRemaining = this.ballsToOvers(ballsRemaining);
+        let oversRemaining: number = this.ballsToOvers(ballsRemaining);
         return (currentRunRate * oversRemaining) + runsMade;
     }
 
