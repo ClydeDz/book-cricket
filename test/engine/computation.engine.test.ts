@@ -1,6 +1,6 @@
 import { ComputationEngine } from "../../src/javascript/engine/computation.engine";
 
-describe("balls to overs", function ():void {
+describe("ballsToOvers", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
         let overs: number = computationEngine.ballsToOvers(267);
@@ -8,7 +8,7 @@ describe("balls to overs", function ():void {
     });
 });
 
-describe("target runs", function ():void {
+describe("targetRuns", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
         let overs: number = computationEngine.targetRuns(153);
@@ -16,7 +16,7 @@ describe("target runs", function ():void {
     });
 });
 
-describe("runs to win", function ():void {
+describe("runsToWin", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
         let overs: number = computationEngine.runsToWin(125, 150);
@@ -24,7 +24,7 @@ describe("runs to win", function ():void {
     });
 });
 
-describe("runs rate", function ():void {
+describe("runRate", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
         let overs: number = computationEngine.runRate(20, 4);
@@ -32,34 +32,34 @@ describe("runs rate", function ():void {
     });
 });
 
-describe("getProjectedScore", function ():void {
+describe("projectedScore", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
-        let overs: number = computationEngine.getProjectedScore(160, 31.4, 5.095541401, 50);
+        let overs: number = computationEngine.projectedScore(160, 31.4, 5.095541401, 50);
         expect(overs).toEqual(252.7388534982);
     });
 });
 
-describe("getRequiredRunRate", function ():void {
+describe("requiredRunRate", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
-        let overs: number = computationEngine.getRequiredRunRate(160, 31.4, 301, 50);
+        let overs: number = computationEngine.requiredRunRate(160, 31.4, 301, 50);
         expect(overs).toEqual(7.69);
     });
 });
 
-describe("getBattingStrikeRate", function ():void {
+describe("battingStrikeRate", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
-        let overs: number = computationEngine.getBattingStrikeRate(96, 80);
+        let overs: number = computationEngine.battingStrikeRate(96, 80);
         expect(overs).toEqual(120);
     });
 });
 
-describe("getBowlingEconomy", function ():void {
+describe("bowlingEconomy", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
-        let overs: number = computationEngine.getBowlingEconomy(6, 21);
+        let overs: number = computationEngine.bowlingEconomy(6, 21);
         expect(overs).toEqual(21);
     });
 });

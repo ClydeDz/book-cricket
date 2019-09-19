@@ -20,25 +20,25 @@ export class ComputationEngine {
         return targetRuns - runsMade;
     }
 
-    getProjectedScore(runsMade: number, oversPlayed: number, currentRunRate: number, totalOvers: number): number {
+    projectedScore(runsMade: number, oversPlayed: number, currentRunRate: number, totalOvers: number): number {
         let ballsRemaining: number = this.oversToBalls(totalOvers) - this.oversToBalls(oversPlayed);
         let oversRemaining: number = this.ballsToOvers(ballsRemaining);
         return (currentRunRate * oversRemaining) + runsMade;
     }
 
-    getRequiredRunRate(runsMade: number, oversPlayed: number, targetRuns: number, totalOvers: number): number{
+    requiredRunRate(runsMade: number, oversPlayed: number, targetRuns: number, totalOvers: number): number {
         let runsRemaining: number = targetRuns - runsMade;
         let ballsRemaining: number = this.oversToBalls(totalOvers) - this.oversToBalls(oversPlayed);
         let requiredRR: number = (runsRemaining / ballsRemaining) * 6;
         return Math.round(requiredRR * 100) / 100;
     }
 
-    getBattingStrikeRate(runsMade: number, ballsPlayed: number): number {
+    battingStrikeRate(runsMade: number, ballsPlayed: number): number {
         let strikeRate: number = runsMade * 100 / ballsPlayed;
         return Math.round(strikeRate * 100) / 100;
     }
 
-    getBowlingEconomy(ballsBowled: number, runsGiven: number):number {
+    bowlingEconomy(ballsBowled: number, runsGiven: number):number {
         return runsGiven / (ballsBowled/6);
     }
 }
