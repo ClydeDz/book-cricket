@@ -39,9 +39,47 @@ export class GameplayAPI {
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
 
         let playerScorecard: Scorecard = new Scorecard();
-        playerScorecard.players = players; 
+        playerScorecard.players = players;
         playerScorecard.requiredRunRate = this.computationEngine.requiredRunRate(0,0,targetRuns,totalOvers);
 
         return playerScorecard;
+    }
+
+    getRunScored(): number {
+        return 2;
+    }
+
+    isGameOver(ballsPlayed: number): boolean {
+        return ballsPlayed >= this.gameConstant.totalBalls;
+    }
+
+    updatePlayerScorecard(playerScorecard: Scorecard, cpuScorecard: Scorecard, runScored: number): Scorecard {
+        let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
+        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+
+        playerScorecard.players =  this.updatePlayerScorecardPlayers(playerScorecard.players, runScored, playerScorecard.wickets);
+        playerScorecard.balls = ++playerScorecard.balls;
+        playerScorecard.wickets = runScored === 0 ? ++playerScorecard.wickets: playerScorecard.wickets;
+        playerScorecard.runs = playerScorecard.runs + runScored;
+        playerScorecard.overs = this.computationEngine.ballsToOvers(playerScorecard.balls);
+        playerScorecard.currentRunRate = this.computationEngine.runRate(playerScorecard.runs, playerScorecard.overs);
+        playerScorecard.requiredRunRate = this.computationEngine.requiredRunRate(
+            playerScorecard.runs,playerScorecard.balls,targetRuns,totalOvers);
+        playerScorecard.projectedScore = this.computationEngine.projectedScore(
+            playerScorecard.runs, playerScorecard.overs, playerScorecard.currentRunRate, totalOvers
+        );
+
+        return playerScorecard;
+    }
+
+    updatePlayerScorecardPlayers(players: Array<ScorecardPlayer>, runScored: number, currentPlayer: number): Array<ScorecardPlayer> {
+        let playerOnStrike: ScorecardPlayer = players[currentPlayer];
+        playerOnStrike.runs = playerOnStrike.runs + runScored;
+        playerOnStrike.balls = ++playerOnStrike.balls;
+        playerOnStrike.overs = this.computationEngine.ballsToOvers(playerOnStrike.balls);
+        playerOnStrike.strikeRate = this.computationEngine.battingStrikeRate(playerOnStrike.runs, playerOnStrike.balls);
+
+        players[currentPlayer] = playerOnStrike;
+        return players;
     }
 }

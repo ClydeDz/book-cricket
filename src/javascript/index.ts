@@ -21,20 +21,32 @@ $(document).ready(function():void {
 
     $("#getTargetBtn").click(function():void {
        console.log("getTargetBtn");
-       targetScore = gameplayAPI.getTargetScore();
     });
+
     $("#resetBtn").click(function():void {
         console.log("resetBtn");
         let allPlayers: Array<ScorecardPlayer> = gameplayAPI.generateTeam(gameConstant.teamSize * gameConstant.numberOfTeams);
         cpuScorecard = gameplayAPI.initCPUScorecard(allPlayers.splice(0, gameConstant.teamSize));
         userScorecard = gameplayAPI.initPlayerScorecard(allPlayers, cpuScorecard);
     });
+
     $("#flipBtn").click(function():void {
         console.log("flipBtn");
+        if(gameplayAPI.isGameOver(userScorecard.balls)) {
+            return;
+        }
+
+        let runScored: number = gameplayAPI.getRunScored();
+        cpuScorecard = cpuScorecard;
+        userScorecard = gameplayAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored);
     });
+
     $("#printScorecardBtn").click(function():void {
-        console.log("printScorecardBtn");
+        console.log("*********************************");
+        console.log("player");
         console.log(userScorecard);
+        console.log("cpu");
         console.log(cpuScorecard);
+        console.log("*********************************");
     });
 });

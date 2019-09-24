@@ -49,6 +49,7 @@ export class Scorecard {
     players: Array<ScorecardPlayer> = [];
     runs: number = 0;
     balls: number = 0;
+    wickets: number = 0;
     overs: number = 0;
     currentRunRate: number = 0;
     projectedScore: number = 0;
