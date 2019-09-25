@@ -6,4 +6,20 @@ export class GameplayEngine {
         let selected: Array<ScorecardPlayer> = shuffled.slice(0,n);
         return selected;
     }
+
+    getCurrentOver(overs: number): number {
+        return Math.trunc(overs);
+    }
+
+    getTargetScore(possibleRuns: number[], totalBalls: number): number {
+        possibleRuns.splice(possibleRuns.indexOf(0), 1);
+        let zeroRemovedPossibleRuns: number[] = possibleRuns;
+        let min: number = Math.min.apply(Math, zeroRemovedPossibleRuns);
+        let max: number = Math.max.apply(Math, zeroRemovedPossibleRuns);
+        let averageRuns: number = (min*totalBalls + max*totalBalls)/2;
+        let minAverageRuns: number = averageRuns - ( (min*totalBalls) / 2);
+        let maxAverageRuns: number = averageRuns + (min*totalBalls);
+
+        return Math.floor(Math.random() * (maxAverageRuns - minAverageRuns + 1)) + minAverageRuns;
+    }
 }

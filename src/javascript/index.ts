@@ -37,7 +37,7 @@ $(document).ready(function():void {
         }
 
         let runScored: number = gameplayAPI.getRunScored();
-        cpuScorecard = cpuScorecard;
+        cpuScorecard = gameplayAPI.updateCPUScorecard(cpuScorecard, runScored, userScorecard);
         userScorecard = gameplayAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored);
     });
 

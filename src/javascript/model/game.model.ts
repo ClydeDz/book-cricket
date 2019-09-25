@@ -39,6 +39,7 @@ export class ScorecardPlayer extends Player {
     runs: number = 0;
     balls: number = 0;
     overs: number = 0;
+    wicketTakenBy: string = "";
     strikeRate: number = 0;
     ballsBowled: number = 0;
     runsGiven: number = 0;
