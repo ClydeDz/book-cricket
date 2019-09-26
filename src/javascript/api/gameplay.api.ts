@@ -12,7 +12,7 @@ export class GameplayAPI {
 
     generateTeam(teamSize: number): Array<ScorecardPlayer> {
         let allPlayers: any = this.playerConstant.allPlayers();
-        let randomTeam: any = this.gameplayEngine.getRandom(allPlayers, teamSize);
+        let randomTeam: any = this.gameplayEngine.getRandomPlayers(allPlayers, teamSize);
         let team: Array<ScorecardPlayer> =[];
         for(let i:number=0; i< randomTeam.length; i++) {
             team.push(allPlayers[i]);
