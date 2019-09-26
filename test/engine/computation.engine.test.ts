@@ -47,7 +47,7 @@ describe("requiredRunRate", function ():void {
         expect(overs).toEqual(30);
         overs = computationEngine.requiredRunRate(12,0.3,27,1);
         expect(overs).toEqual(30);
-        overs = computationEngine.requiredRunRate(160, 31.4, 301, 50)
+        overs = computationEngine.requiredRunRate(160, 31.4, 301, 50);
         expect(overs).toEqual(7.69);
     });
 });
