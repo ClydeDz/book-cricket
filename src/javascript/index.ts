@@ -14,9 +14,6 @@ let gameplayAPI: GameplayAPI = new GameplayAPI();
 let gameConstant: GameConstant = new GameConstant();
 
 $(document).ready(function():void {
-    // sample
-    console.log(gameplayAPI.generateTeam(gameConstant.teamSize));
-
     $("#getTargetBtn").click(function():void {
        console.log("getTargetBtn");
     });
