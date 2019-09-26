@@ -56,3 +56,8 @@ export class Scorecard {
     projectedScore: number = 0;
     requiredRunRate: number = 0;
 }
+
+export class RunScored {
+    display: string = "";
+    actual: number = 0;
+}

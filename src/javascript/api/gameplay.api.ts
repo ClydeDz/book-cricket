@@ -1,6 +1,6 @@
 import { GameplayEngine } from "../engine/gameplay.engine";
 import { PlayerConstant } from "../constant/player.constant";
-import { Player, ScorecardPlayer, Scorecard } from "../model/game.model";
+import { Player, ScorecardPlayer, Scorecard, RunScored } from "../model/game.model";
 import { GameConstant } from "../constant/game.constant";
 import { ComputationEngine } from "../engine/computation.engine";
 
@@ -45,13 +45,21 @@ export class GameplayAPI {
         return playerScorecard;
     }
 
-    getRunScored(): number {
+    getRunScored(): RunScored {
         let allowedRuns: number[] = this.gameConstant.possibleRuns;
-        return allowedRuns[Math.floor(Math.random() * allowedRuns.length)];
+        let runScored: number = allowedRuns[Math.floor(Math.random() * allowedRuns.length)];
+        let bookPagePrefix: string = (this.gameplayEngine.getBookPageNumber(
+            this.gameConstant.bookStartingPageNumber, this.gameConstant.bookEndingPageNumber)).toString();
+
+        return { display: bookPagePrefix + runScored, actual: runScored };
     }
 
     isGameOver(ballsPlayed: number): boolean {
         return ballsPlayed >= this.gameConstant.totalBalls;
+    }
+
+    didPlayerWin(playerScorecard: Scorecard, cpuScorecard: Scorecard): boolean {
+        return playerScorecard.runs > cpuScorecard.runs;
     }
 
     updatePlayerScorecard(playerScorecard: Scorecard, cpuScorecard: Scorecard, runScored: number): Scorecard {
@@ -59,7 +67,7 @@ export class GameplayAPI {
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
         let hasWicketFallen: boolean = runScored === 0;
 
-        playerScorecard.players =  this.updatePlayerScorecardPlayers(playerScorecard.players, runScored, 
+        playerScorecard.players =  this.updatePlayerScorecardPlayers(playerScorecard.players, runScored,
             playerScorecard.wickets, cpuScorecard, playerScorecard.balls);
         playerScorecard.balls = ++playerScorecard.balls;
         playerScorecard.wickets = hasWicketFallen ? ++playerScorecard.wickets: playerScorecard.wickets;
@@ -67,7 +75,7 @@ export class GameplayAPI {
         playerScorecard.overs = this.computationEngine.ballsToOvers(playerScorecard.balls);
         playerScorecard.currentRunRate = this.computationEngine.runRate(playerScorecard.runs, playerScorecard.overs);
         playerScorecard.requiredRunRate = this.computationEngine.requiredRunRate(
-            playerScorecard.runs,playerScorecard.balls,targetRuns,totalOvers);
+            playerScorecard.runs,playerScorecard.overs,targetRuns,totalOvers);
         playerScorecard.projectedScore = this.computationEngine.projectedScore(
             playerScorecard.runs, playerScorecard.overs, playerScorecard.currentRunRate, totalOvers
         );

@@ -43,7 +43,11 @@ describe("projectedScore", function ():void {
 describe("requiredRunRate", function ():void {
     test("should return expected results", function ():void {
         let  computationEngine: any = new ComputationEngine();
-        let overs: number = computationEngine.requiredRunRate(160, 31.4, 301, 50);
+        let overs: number = computationEngine.requiredRunRate(24, 0.5, 29, 1);
+        expect(overs).toEqual(30);
+        overs = computationEngine.requiredRunRate(12,0.3,27,1);
+        expect(overs).toEqual(30);
+        overs = computationEngine.requiredRunRate(160, 31.4, 301, 50)
         expect(overs).toEqual(7.69);
     });
 });

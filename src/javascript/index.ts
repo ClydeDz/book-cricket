@@ -1,6 +1,6 @@
 import * as $ from "jquery";
 import { GameplayAPI } from "./api/gameplay.api";
-import { Player, ScorecardPlayer, Scorecard } from "./model/game.model";
+import { Player, ScorecardPlayer, Scorecard, RunScored } from "./model/game.model";
 import { GameConstant } from "./constant/game.constant";
 console.log("Book cricket console");
 
@@ -33,20 +33,37 @@ $(document).ready(function():void {
     $("#flipBtn").click(function():void {
         console.log("flipBtn");
         if(gameplayAPI.isGameOver(userScorecard.balls)) {
+            let gameResultsMessage: string = gameplayAPI.didPlayerWin(userScorecard, cpuScorecard) ? 
+                "CONGRATULATIONS!!! You won": "Sorry, try again";
+            console.log(gameResultsMessage);
+            printScorecard();
             return;
         }
 
-        let runScored: number = gameplayAPI.getRunScored();
-        cpuScorecard = gameplayAPI.updateCPUScorecard(cpuScorecard, runScored, userScorecard);
-        userScorecard = gameplayAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored);
+        let runScored: RunScored = gameplayAPI.getRunScored();
+        console.log(">>>>>>>>>>>>", runScored, "<<<<<<<<<<<<<<");
+        cpuScorecard = gameplayAPI.updateCPUScorecard(cpuScorecard, runScored.actual, userScorecard);
+        userScorecard = gameplayAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored.actual);
+
+        if(gameplayAPI.isGameOver(userScorecard.balls)) {
+            let gameResultsMessage: string = gameplayAPI.didPlayerWin(userScorecard, cpuScorecard) ? 
+                "CONGRATULATIONS!!! You won": "Sorry, try again";
+            console.log(gameResultsMessage);
+            printScorecard();
+            return;
+        }
     });
 
     $("#printScorecardBtn").click(function():void {
-        console.log("*********************************");
-        console.log("player");
-        console.log(userScorecard);
-        console.log("cpu");
-        console.log(cpuScorecard);
-        console.log("*********************************");
+        printScorecard();
     });
+
+    function printScorecard(): void {
+        console.log("**********SCORECARD*********");
+        console.log("PLAYER");
+        console.log(userScorecard);
+        console.log("CPU");
+        console.log(cpuScorecard);
+        console.log("****************************");
+    }
 });
