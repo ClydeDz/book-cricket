@@ -2,12 +2,10 @@ import * as $ from "jquery";
 import { GameplayAPI } from "./api/gameplay.api";
 import { Player, ScorecardPlayer, Scorecard, RunScored } from "./model/game.model";
 import { GameConstant } from "./constant/game.constant";
+
 console.log("Book cricket console");
 
 // required variables
-let targetScore = 0;
-let userTeam: Array<Player> = [];
-let cpuTeam: Array<Player> = [];
 let userScorecard: Scorecard = new Scorecard();
 let cpuScorecard: Scorecard = new Scorecard();
 
@@ -33,10 +31,7 @@ $(document).ready(function():void {
     $("#flipBtn").click(function():void {
         console.log("flipBtn");
         if(gameplayAPI.isGameOver(userScorecard.balls)) {
-            let gameResultsMessage: string = gameplayAPI.didPlayerWin(userScorecard, cpuScorecard) ? 
-                "CONGRATULATIONS!!! You won": "Sorry, try again";
-            console.log(gameResultsMessage);
-            printScorecard();
+            gameOverShenanigans();
             return;
         }
 
@@ -46,10 +41,7 @@ $(document).ready(function():void {
         userScorecard = gameplayAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored.actual);
 
         if(gameplayAPI.isGameOver(userScorecard.balls)) {
-            let gameResultsMessage: string = gameplayAPI.didPlayerWin(userScorecard, cpuScorecard) ? 
-                "CONGRATULATIONS!!! You won": "Sorry, try again";
-            console.log(gameResultsMessage);
-            printScorecard();
+            gameOverShenanigans();
             return;
         }
     });
@@ -65,5 +57,12 @@ $(document).ready(function():void {
         console.log("CPU");
         console.log(cpuScorecard);
         console.log("****************************");
+    }
+
+    function gameOverShenanigans(): void {
+        let gameResultsMessage: string = gameplayAPI.didPlayerWin(userScorecard, cpuScorecard) ?
+            "CONGRATULATIONS!!! You won": "Sorry, try again";
+        console.log(gameResultsMessage);
+        printScorecard();
     }
 });

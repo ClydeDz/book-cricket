@@ -2,7 +2,7 @@ import { ComputationEngine } from "../../src/javascript/engine/computation.engin
 
 describe("ballsToOvers", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.ballsToOvers(267);
         expect(overs).toEqual(44.3);
     });
@@ -10,7 +10,7 @@ describe("ballsToOvers", function ():void {
 
 describe("targetRuns", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.targetRuns(153);
         expect(overs).toEqual(154);
     });
@@ -18,7 +18,7 @@ describe("targetRuns", function ():void {
 
 describe("runsToWin", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.runsToWin(125, 150);
         expect(overs).toEqual(25);
     });
@@ -26,7 +26,7 @@ describe("runsToWin", function ():void {
 
 describe("runRate", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.runRate(20, 4);
         expect(overs).toEqual(5);
     });
@@ -34,7 +34,7 @@ describe("runRate", function ():void {
 
 describe("projectedScore", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.projectedScore(160, 31.4, 5.095541401, 50);
         expect(overs).toEqual(252.7388534982);
     });
@@ -42,7 +42,7 @@ describe("projectedScore", function ():void {
 
 describe("requiredRunRate", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.requiredRunRate(24, 0.5, 29, 1);
         expect(overs).toEqual(30);
         overs = computationEngine.requiredRunRate(12,0.3,27,1);
@@ -54,7 +54,7 @@ describe("requiredRunRate", function ():void {
 
 describe("battingStrikeRate", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.battingStrikeRate(96, 80);
         expect(overs).toEqual(120);
     });
@@ -62,7 +62,7 @@ describe("battingStrikeRate", function ():void {
 
 describe("bowlingEconomy", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.bowlingEconomy(6, 21);
         expect(overs).toEqual(21);
     });
@@ -70,7 +70,7 @@ describe("bowlingEconomy", function ():void {
 
 describe("oversToBalls", function ():void {
     test("should return expected results", function ():void {
-        let  computationEngine: any = new ComputationEngine();
+        let  computationEngine: ComputationEngine = new ComputationEngine();
         let overs: number = computationEngine.oversToBalls(31.4);
         expect(overs).toEqual(190);
     });
