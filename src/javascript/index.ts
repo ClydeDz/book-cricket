@@ -5,11 +5,11 @@ import { GameConstant } from "./constant/game.constant";
 
 console.log("Book cricket console");
 
-// required variables
+// Required variables
 let userScorecard: Scorecard = new Scorecard();
 let cpuScorecard: Scorecard = new Scorecard();
 
-// api init's
+// API's
 let gameplayAPI: GameplayAPI = new GameplayAPI();
 let gameConstant: GameConstant = new GameConstant();
 

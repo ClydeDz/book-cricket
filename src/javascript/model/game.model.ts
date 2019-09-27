@@ -46,6 +46,7 @@ export class ScorecardPlayer extends Player {
     wickets: number = 0;
     economy: number = 0;
 }
+
 export class Scorecard {
     players: Array<ScorecardPlayer> = [];
     runs: number = 0;

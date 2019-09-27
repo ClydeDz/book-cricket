@@ -2,9 +2,9 @@ import { Player, ScorecardPlayer } from "../model/game.model";
 
 export class PlayerConstant {
     allPlayers(): Array<ScorecardPlayer> {
-        // for future reference:
-        // the data below is constructed from an Excel formula out of a cleansed data set
-        // multiple filters were applied to cleanse the data from its original format
+        // For future reference:
+        // The data below is constructed from an Excel formula out of a cleansed data set.
+        // Multiple filters were applied to cleanse the data from its original format.
         return [
             new ScorecardPlayer(253802,"Virat Kohli","India",31,"Right-hand bat","Right-arm medium",10843,6.22,true,false),
             new ScorecardPlayer(28081,"MS Dhoni","India",38,"Right-hand bat","Right-arm medium",10500,5.16,true,false),
