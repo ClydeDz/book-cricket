@@ -2,15 +2,15 @@ import * as $ from "jquery";
 import { GameplayAPI } from "./api/gameplay.api";
 import { Player, ScorecardPlayer, Scorecard, RunScored } from "./model/game.model";
 import { GameConstant } from "./constant/game.constant";
+import { ScorecardAPI } from "./api/scorecard.api";
 
 console.log("Book cricket console");
 
 // Required variables
 let userScorecard: Scorecard = new Scorecard();
 let cpuScorecard: Scorecard = new Scorecard();
-
-// API's
 let gameplayAPI: GameplayAPI = new GameplayAPI();
+let scorecardAPI: ScorecardAPI = new ScorecardAPI();
 let gameConstant: GameConstant = new GameConstant();
 
 $(document).ready(function():void {
@@ -21,8 +21,8 @@ $(document).ready(function():void {
     $("#resetBtn").click(function():void {
         console.log("resetBtn");
         let allPlayers: Array<ScorecardPlayer> = gameplayAPI.generateTeam(gameConstant.teamSize * gameConstant.numberOfTeams);
-        cpuScorecard = gameplayAPI.initCPUScorecard(allPlayers.splice(0, gameConstant.teamSize));
-        userScorecard = gameplayAPI.initPlayerScorecard(allPlayers, cpuScorecard);
+        cpuScorecard = scorecardAPI.initCPUScorecard(allPlayers.splice(0, gameConstant.teamSize));
+        userScorecard = scorecardAPI.initPlayerScorecard(allPlayers, cpuScorecard);
     });
 
     $("#flipBtn").click(function():void {
@@ -34,8 +34,8 @@ $(document).ready(function():void {
 
         let runScored: RunScored = gameplayAPI.getRunScored();
         console.log(">>>>>>>>>>>>", runScored, "<<<<<<<<<<<<<<");
-        cpuScorecard = gameplayAPI.updateCPUScorecard(cpuScorecard, runScored.actual, userScorecard);
-        userScorecard = gameplayAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored.actual);
+        cpuScorecard = scorecardAPI.updateCPUScorecard(cpuScorecard, runScored.actual, userScorecard);
+        userScorecard = scorecardAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored.actual);
 
         if(gameplayAPI.isGameOver(userScorecard.balls)) {
             gameOverShenanigans();
