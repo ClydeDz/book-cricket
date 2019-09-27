@@ -3,7 +3,6 @@ import { GameplayAPI } from "./api/gameplay.api";
 import { Player, ScorecardPlayer, Scorecard, RunScored } from "./model/game.model";
 import { GameConstant } from "./constant/game.constant";
 import { ScorecardAPI } from "./api/scorecard.api";
-import { DisplayAPI } from "./api/display.api";
 
 console.log("Book cricket console");
 
@@ -11,15 +10,12 @@ console.log("Book cricket console");
 let userScorecard: Scorecard = new Scorecard();
 let cpuScorecard: Scorecard = new Scorecard();
 let gameplayAPI: GameplayAPI = new GameplayAPI();
-let displayAPI: DisplayAPI = new DisplayAPI();
 let scorecardAPI: ScorecardAPI = new ScorecardAPI();
 let gameConstant: GameConstant = new GameConstant();
 
 $(document).ready(function():void {
-    displayAPI.startGame();
-
-    $("#flipPageBtn").click(function():void {
-        displayAPI.flipPage();
+    $("#getTargetBtn").click(function():void {
+       console.log("getTargetBtn");
     });
 
     $("#resetBtn").click(function():void {

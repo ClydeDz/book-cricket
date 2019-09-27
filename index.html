@@ -4,10 +4,53 @@
         <link rel="stylesheet" href="./dist/bundle.css" />
     </head>
     <body>
-        <p>Book Cricket</p>
-        <button id="resetBtn">Initialize</button>
-        <button id="flipBtn">Flip page</button>
-        <button id="printScorecardBtn">Print scorecard</button>
+        <div id="consoleGame">
+                <p>Book Cricket</p>
+                <button id="resetBtn">Initialize</button>
+                <button id="flipBtn">Flip page</button>
+                <button id="printScorecardBtn">Print scorecard</button>
+        </div>
+        <div id="preGameMessage" data-prefix="pgm">
+            <p>You need to make <span id="t"></span> runs in <span id="o"></span> overs.</p>
+        </div>
+        <div id="game">
+            <div id="statsHeader" data-prefix="stats">
+                <div>
+                    You <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span> 
+                    CPU (<span id="statsCPURuns"></span>)
+                </div>
+                <div>
+                    Overs <span id="statsOvers"></span>
+                    <span id="statsBall1"></span>|<span id="statsBall2"></span>|<span id="statsBall3"></span>|
+                    <span id="statsBall4"></span>|<span id="statsBall5"></span>|<span id="statsBall6"></span>|
+                </div>
+                <hr/>
+                <div>
+                    Current run rate: <span id="statsCurrentRunRate"></span> 
+                    Required run rate: <span id="statsRequiredRunRate"></span> 
+                    Projected score: <span id="statsProjectedScore"></span> 
+                </div>
+                <div>
+                    Batsman: <span id="statsBatsman"></span> | <span id="statsBatsmanStyle"></span> | <span id="statsBatsmanStarPlayer"></span> 
+                    Bowler: <span id="statsBowler"></span> | <span id="statsBowlerStyle"></span> | <span id="statsBowlerStarPlayer"></span> 
+                </div>
+                <hr/>
+            </div>
+            <div id="gamePlayArea" data-prefix="gpa">
+                    <div>
+                        <span class="gpaRunScored"></span>
+                        <span class="gpaRunScored"></span>
+                        <span id="gpaPageFlipped"></span>
+                        <span class="gpaRunScored"></span>
+                        <span class="gpaRunScored"></span>
+                    </div>
+                    <button id="flipPageBtn">Flip page</button>
+            </div>    
+            <div id="scorecardFooter" data-prefix="scorecard">
+                <div id="scorecardPlayer"></div>
+                <div id="scorecardCPU"></div>
+            </div>
+        </div>
         <script src="./dist/bundle.js"></script>
     </body>
 </html>

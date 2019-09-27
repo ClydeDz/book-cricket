@@ -1,0 +1,128 @@
+import * as jQuery from "jquery";
+import { GameplayAPI } from "./gameplay.api";
+import { Player, ScorecardPlayer, Scorecard, RunScored } from "../model/game.model";
+import { GameConstant } from "../constant/game.constant";
+import { ScorecardAPI } from "./scorecard.api";
+import { ComputationEngine } from "../engine/computation.engine";
+import { GameplayEngine } from "../engine/gameplay.engine";
+
+export class DisplayAPI {   
+    private playerScorecard: Scorecard = new Scorecard();
+    private cpuScorecard: Scorecard = new Scorecard();
+    private gameplayAPI: GameplayAPI = new GameplayAPI();
+    private scorecardAPI: ScorecardAPI = new ScorecardAPI();
+    private gameConstant: GameConstant = new GameConstant();
+    private computationEngine: ComputationEngine = new ComputationEngine();
+    private gameplayEngine: GameplayEngine = new GameplayEngine();
+
+    startGame(): void {
+        let allPlayers: Array<ScorecardPlayer> = this.gameplayAPI.generateTeam(
+            this.gameConstant.teamSize * this.gameConstant.numberOfTeams);
+        this.cpuScorecard = this.scorecardAPI.initCPUScorecard(allPlayers.splice(0, this.gameConstant.teamSize));
+        this.playerScorecard = this.scorecardAPI.initPlayerScorecard(allPlayers, this.cpuScorecard);
+
+        this.displayPreGameMessage(this.cpuScorecard);
+        this.updateStatsHeader(this.playerScorecard, this.cpuScorecard);
+    }
+
+    flipPage(): void {
+        if(this.gameplayAPI.isGameOver(this.playerScorecard.balls)) {
+            // gameOverShenanigans();
+            return;
+        }
+
+        let runScored: RunScored = this.gameplayAPI.getRunScored();
+        this.updateGamePlayArea(runScored);
+
+        this.cpuScorecard = this.scorecardAPI.updateCPUScorecard(this.cpuScorecard, runScored.actual, this.playerScorecard);
+        this.playerScorecard = this.scorecardAPI.updatePlayerScorecard(this.playerScorecard, this.cpuScorecard, runScored.actual);
+        this.updateStatsHeader(this.playerScorecard, this.cpuScorecard);
+        this.updateScorecardFooter(this.playerScorecard, this.cpuScorecard);
+
+        if(this.gameplayAPI.isGameOver(this.playerScorecard.balls)) {
+            // gameOverShenanigans();
+            return;
+        }
+    }
+    
+    // UI updates using JQuery
+    // -----------------------
+
+    displayPreGameMessage(cpuScorecard: Scorecard): void {
+        let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
+        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+
+        jQuery("#preGameMessage #t").html(targetRuns.toString());
+        jQuery("#preGameMessage #o").html(totalOvers.toString());
+    }
+
+    updateStatsHeader(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
+        let currentOver: number = this.gameplayEngine.getCurrentOver(playerScorecard.overs);
+        let batsman: ScorecardPlayer = playerScorecard.players[playerScorecard.wickets];
+        let bowler: ScorecardPlayer = cpuScorecard.players[currentOver];
+
+        jQuery("#statsHeader #statsPlayerRuns").html(playerScorecard.runs.toString());
+        jQuery("#statsHeader #statsPlayerWickets").html(playerScorecard.wickets.toString());
+        jQuery("#statsHeader #statsCPURuns").html(cpuScorecard.runs.toString());
+
+        jQuery("#statsHeader #statsOvers").html(playerScorecard.overs.toString());
+        jQuery("#statsHeader #statsBall1").html(playerScorecard.runs.toString());
+        jQuery("#statsHeader #statsBall2").html(playerScorecard.runs.toString());
+        jQuery("#statsHeader #statsBall3").html(playerScorecard.runs.toString());
+        jQuery("#statsHeader #statsBall4").html(playerScorecard.runs.toString());
+        jQuery("#statsHeader #statsBall5").html(playerScorecard.runs.toString());
+        jQuery("#statsHeader #statsBall6").html(playerScorecard.runs.toString());
+
+        jQuery("#statsHeader #statsCurrentRunRate").html(playerScorecard.currentRunRate.toString());
+        jQuery("#statsHeader #statsRequiredRunRate").html(playerScorecard.requiredRunRate.toString());
+        jQuery("#statsHeader #statsProjectedScore").html(playerScorecard.projectedScore.toString());
+        
+        jQuery("#statsHeader #statsBatsman").html(batsman.name);
+        jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
+        jQuery("#statsHeader #statsBatsmanStarPlayer").html(batsman.starBatsman ? "YES": "No");
+        jQuery("#statsHeader #statsBowler").html(bowler.name);
+        jQuery("#statsHeader #statsBowlerStyle").html(bowler.bowlingStyle);
+        jQuery("#statsHeader #statsBowlerStarPlayer").html(bowler.starBowler ? "YES": "No");
+    }
+
+    updateGamePlayArea(runScored: RunScored): void {
+        jQuery("#gamePlayArea #gpaPageFlipped").html(runScored.display.toString());
+        jQuery("#gamePlayArea .gpaRunScored").html(runScored.actual.toString());        
+    }
+
+    updateScorecardFooter(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
+        this.updatePlayerScorecard(playerScorecard);
+        this.updateCPUScorecard(cpuScorecard);
+    }
+
+    updatePlayerScorecard(playerScorecard: Scorecard): void {
+        let scorecardPlayerContent: string = "";
+        let linebreak: string = "<br/>";
+
+        scorecardPlayerContent += `YOU ${linebreak}`;
+        scorecardPlayerContent += `Player --- Runs --- Balls --- S/R ${linebreak}`;
+        for(let i: number = 0; i < playerScorecard.players.length; i++){
+            let player = playerScorecard.players[i];
+            let wicketTakenBy = player.wicketTakenBy != "" ? ` (b) ${player.wicketTakenBy}`: "";
+            scorecardPlayerContent += `${player.name}${wicketTakenBy} --- ${player.runs} --- ${player.balls} --- ${player.strikeRate} ${linebreak}`;
+        }
+        scorecardPlayerContent += `TOTAL: ${playerScorecard.runs}/${playerScorecard.wickets} --- OVERS: ${playerScorecard.overs} ${linebreak}`;
+
+        jQuery("#scorecardFooter #scorecardPlayer").html(scorecardPlayerContent);
+    }
+
+    updateCPUScorecard(cpuScorecard: Scorecard): void {
+        let scorecardCPUContent: string = "";
+        let linebreak: string = "<br/>";
+
+        scorecardCPUContent += `CPU ${linebreak}`;
+        scorecardCPUContent += `Player --- Runs --- Balls --- Wickets --- Eco. ${linebreak}`;
+        for(let i: number = 0; i < cpuScorecard.players.length; i++){
+            let player = cpuScorecard.players[i];
+            scorecardCPUContent += `${player.name} --- ${player.runsGiven} --- ${player.balls} --- ${player.wickets} --- ${player.economy} ${linebreak}`;
+        }
+        scorecardCPUContent += `TOTAL: ${cpuScorecard.runs} --- OVERS: ${cpuScorecard.overs} ${linebreak}`;
+
+        jQuery("#scorecardFooter #scorecardCPU").html(scorecardCPUContent);
+    }
+}
