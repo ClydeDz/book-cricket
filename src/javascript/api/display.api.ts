@@ -22,8 +22,10 @@ export class DisplayAPI {
         this.playerScorecard = this.scorecardAPI.initPlayerScorecard(allPlayers, this.cpuScorecard);
 
         this.resetGameResultsArea();
+        this.resetGamePlayArea();
         this.displayPreGameMessage(this.cpuScorecard);
         this.updateStatsHeader(this.playerScorecard, this.cpuScorecard);
+        this.updateScorecardFooter(this.playerScorecard, this.cpuScorecard);
     }
 
     flipPage(): void {
@@ -55,6 +57,7 @@ export class DisplayAPI {
             jQuery("#gameResultsArea #graWinner").hide();
             jQuery("#gameResultsArea #graLoser").show();
         }
+        jQuery("#gameResultsArea #playAgainBtn").show();
         jQuery("#gamePlayArea #flipPageBtn").hide();
     }    
 
@@ -153,5 +156,12 @@ export class DisplayAPI {
     resetGameResultsArea(): void {
         jQuery("#gameResultsArea #graWinner").hide();
         jQuery("#gameResultsArea #graLoser").hide();
+        jQuery("#gameResultsArea #playAgainBtn").hide();
+    }
+
+    resetGamePlayArea(): void {
+        jQuery("#gamePlayArea #gpaPageFlipped").html("0");
+        jQuery("#gamePlayArea .gpaRunScored").html("");        
+        jQuery("#gamePlayArea #flipPageBtn").show();
     }
 }

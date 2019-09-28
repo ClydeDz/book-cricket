@@ -22,6 +22,10 @@ $(document).ready(function():void {
         displayAPI.flipPage();
     });
 
+    $("#playAgainBtn").click(function():void {
+        displayAPI.startGame();
+    });
+
     $("#resetBtn").click(function():void {
         console.log("resetBtn");
         let allPlayers: Array<ScorecardPlayer> = gameplayAPI.generateTeam(gameConstant.teamSize * gameConstant.numberOfTeams);
