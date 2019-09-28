@@ -93,7 +93,7 @@ export class DisplayAPI {
         jQuery("#statsHeader #statsRequiredRunRate").html(playerScorecard.requiredRunRate.toString());
         jQuery("#statsHeader #statsProjectedScore").html(playerScorecard.projectedScore.toString());
         jQuery("#statsHeader #statsRunsRemaining").html(runsRemaining + "");
-        jQuery("#statsHeader #statsBallsRemaining").html(ballsRemaining + "balls");
+        jQuery("#statsHeader #statsBallsRemaining").html(`${ballsRemaining} ${ballsRemaining === 1 ? "ball": "balls" }`);
         
         jQuery("#statsHeader #statsBatsman").html(batsman.name);
         jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
