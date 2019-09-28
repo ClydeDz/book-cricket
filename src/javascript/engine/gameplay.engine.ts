@@ -16,7 +16,9 @@ export class GameplayEngine {
     }
 
     getTargetScore(possibleRuns: number[], totalBalls: number): number {
-        possibleRuns.splice(possibleRuns.indexOf(0), 1);
+        if(!(possibleRuns.indexOf(0)<0)){
+            possibleRuns.splice(possibleRuns.indexOf(0), 1);
+        }        
         let zeroRemovedPossibleRuns: number[] = possibleRuns;
         let min: number = Math.min.apply(Math, zeroRemovedPossibleRuns);
         let max: number = Math.max.apply(Math, zeroRemovedPossibleRuns);

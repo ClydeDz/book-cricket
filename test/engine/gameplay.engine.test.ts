@@ -32,7 +32,7 @@ describe("getTargetScore", function ():void {
         let possibleRuns: number[] = [0, 2, 4, 6, 8];
         let targetScore: number = gameplayEngine.getTargetScore(possibleRuns, 30);
         expect(targetScore).toBeGreaterThanOrEqual(120);
-        expect(targetScore).toBeLessThanOrEqual(180);
+        expect(targetScore).toBeLessThanOrEqual(210);
 
         possibleRuns = [5, 10];
         targetScore = gameplayEngine.getTargetScore(possibleRuns, 10);

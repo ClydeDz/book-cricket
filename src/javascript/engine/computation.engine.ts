@@ -9,7 +9,8 @@ export class ComputationEngine {
     }
 
     runRate(runs: number, overs: number): number {
-        return runs/overs;
+        let runRate = Math.round((runs/overs) * 100) / 100;
+        return runRate < 0 || runRate === Infinity ? 0 : runRate;
     }
 
     targetRuns(runs: number): number {
@@ -17,20 +18,24 @@ export class ComputationEngine {
     }
 
     runsToWin(runsMade: number, targetRuns: number): number {
-        return targetRuns - runsMade;
+        let runsToWin: number = targetRuns - runsMade;
+        return runsToWin < 0 ? 0 : runsToWin;
     }
 
     projectedScore(runsMade: number, oversPlayed: number, currentRunRate: number, totalOvers: number): number {
         let ballsRemaining: number = this.oversToBalls(totalOvers) - this.oversToBalls(oversPlayed);
         let oversRemaining: number = this.ballsToOvers(ballsRemaining);
-        return (currentRunRate * oversRemaining) + runsMade;
+        let projectedScore: number = (currentRunRate * oversRemaining) + runsMade;
+        projectedScore = Math.round(projectedScore * 100) / 100;
+        return projectedScore < 0 ? 0 : projectedScore;
     }
 
     requiredRunRate(runsMade: number, oversPlayed: number, targetRuns: number, totalOvers: number): number {
         let runsRemaining: number = targetRuns - runsMade;
         let ballsRemaining: number = this.oversToBalls(totalOvers) - this.oversToBalls(oversPlayed);
         let requiredRR: number = (runsRemaining / ballsRemaining) * 6;
-        return Math.round(requiredRR * 100) / 100;
+        requiredRR = Math.round(requiredRR * 100) / 100;
+        return requiredRR < 0 || requiredRR === Infinity ? 0 : requiredRR;
     }
 
     battingStrikeRate(runsMade: number, ballsPlayed: number): number {
