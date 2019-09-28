@@ -21,6 +21,7 @@ export class DisplayAPI {
         this.cpuScorecard = this.scorecardAPI.initCPUScorecard(allPlayers.splice(0, this.gameConstant.teamSize));
         this.playerScorecard = this.scorecardAPI.initPlayerScorecard(allPlayers, this.cpuScorecard);
 
+        this.resetGameResultsArea();
         this.displayPreGameMessage(this.cpuScorecard);
         this.updateStatsHeader(this.playerScorecard, this.cpuScorecard);
     }
@@ -32,7 +33,7 @@ export class DisplayAPI {
         }
 
         let runScored: RunScored = this.gameplayAPI.getRunScored();
-        this.updateGamePlayArea(runScored);
+        this.updateGamePlayArea(runScored, this.playerScorecard);
 
         this.cpuScorecard = this.scorecardAPI.updateCPUScorecard(this.cpuScorecard, runScored.actual, this.playerScorecard);
         this.playerScorecard = this.scorecardAPI.updatePlayerScorecard(this.playerScorecard, this.cpuScorecard, runScored.actual);
@@ -47,9 +48,13 @@ export class DisplayAPI {
     }
 
     gameOverShenanigans(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
-        let gameResultsMessage: string = this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard) ?
-            "CONGRATULATIONS!!! You won": "Sorry, try again";
-        setTimeout(function() { alert(gameResultsMessage); }, 1000);
+        if(this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard)){
+            jQuery("#gameResultsArea #graWinner").show();
+            jQuery("#gameResultsArea #graLoser").hide();
+        } else {
+            jQuery("#gameResultsArea #graWinner").hide();
+            jQuery("#gameResultsArea #graLoser").show();
+        }
         jQuery("#gamePlayArea #flipPageBtn").hide();
     }    
 
@@ -66,7 +71,8 @@ export class DisplayAPI {
 
     updateStatsHeader(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
         let currentOver: number = this.gameplayEngine.getCurrentOver(playerScorecard.overs);
-        let batsman: ScorecardPlayer = playerScorecard.players[playerScorecard.wickets];
+        let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
+        let batsman: ScorecardPlayer = playerScorecard.players[currentBatsman];
         let bowler: ScorecardPlayer = cpuScorecard.players[currentOver];
 
         jQuery("#statsHeader #statsPlayerRuns").html(playerScorecard.runs.toString());
@@ -83,15 +89,22 @@ export class DisplayAPI {
         
         jQuery("#statsHeader #statsBatsman").html(batsman.name);
         jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
-        jQuery("#statsHeader #statsBatsmanStarPlayer").html(batsman.starBatsman ? "YES": "No");
+        jQuery("#statsHeader #statsBatsmanStarPlayer").html(batsman.starBatsman ? "*": "");
         jQuery("#statsHeader #statsBowler").html(bowler.name);
         jQuery("#statsHeader #statsBowlerStyle").html(bowler.bowlingStyle);
-        jQuery("#statsHeader #statsBowlerStarPlayer").html(bowler.starBowler ? "YES": "No");
+        jQuery("#statsHeader #statsBowlerStarPlayer").html(bowler.starBowler ? "*": "");
     }
 
-    updateGamePlayArea(runScored: RunScored): void {
-        jQuery("#gamePlayArea #gpaPageFlipped").html(runScored.display.toString());
+    updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
+        let isDuckOut = playerScorecard.players[playerScorecard.wickets].runs === 0 
+                            && runScored.actual === 0;
+
+        jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
         jQuery("#gamePlayArea .gpaRunScored").html(runScored.actual.toString());        
+
+        if(isDuckOut) {
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html("Duck out");        
+        }
     }
 
     updateScorecardFooter(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
@@ -128,5 +141,12 @@ export class DisplayAPI {
         scorecardCPUContent += `TOTAL: ${cpuScorecard.runs} --- OVERS: ${cpuScorecard.overs} ${linebreak}`;
 
         jQuery("#scorecardFooter #scorecardCPU").html(scorecardCPUContent);
+    }
+
+    // Initialize
+
+    resetGameResultsArea(): void {
+        jQuery("#gameResultsArea #graWinner").hide();
+        jQuery("#gameResultsArea #graLoser").hide();
     }
 }

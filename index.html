@@ -38,14 +38,22 @@
             </div>
             <div id="gamePlayArea" data-prefix="gpa">
                     <div>
-                        <span class="gpaRunScored"></span>
-                        <span class="gpaRunScored"></span>
-                        <span id="gpaPageFlipped"></span>
-                        <span class="gpaRunScored"></span>
-                        <span class="gpaRunScored"></span>
+                        [<span class="gpaRunScored"></span>]
+                        [<span class="gpaRunScored gpaRunScoredExtra"></span>]
+                        [<span id="gpaPageFlipped"></span>]
+                        [<span class="gpaRunScored gpaRunScoredExtra"></span>]
+                        [<span class="gpaRunScored"></span>]
                     </div>
                     <button id="flipPageBtn">Flip page</button>
             </div>    
+            <div id="gameResultsArea" data-prefix="gra">
+                <div id="graWinner">
+                    <p>CONGRATULATIONS!!! You won</p>
+                </div>
+                <div id="graLoser">
+                    <p>Sorry, try again</p>
+                </div>
+            </div>
             <div id="scorecardFooter" data-prefix="scorecard">
                 <div id="scorecardPlayer"></div>
                 <div id="scorecardCPU"></div>
