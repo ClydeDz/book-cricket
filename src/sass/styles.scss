@@ -1,8 +1,2 @@
-@import "./abstract/variables";
-
-body {
-    background-color: $one; 
-    color: black;
-    font-size: 20px;
-    transition: all ease 0.5s
-}
+@import "./components/stats-header";
+@import "./components/general";

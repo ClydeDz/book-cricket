@@ -16,7 +16,8 @@ let scorecardAPI: ScorecardAPI = new ScorecardAPI();
 let gameConstant: GameConstant = new GameConstant();
 
 $(document).ready(function():void {
-    displayAPI.startGame();
+    displayAPI.startGame();    
+    var interval = self.setInterval(function(){ displayAPI.infiniteRoll("div.stats-slider>div") },3000);
 
     $("#flipPageBtn").click(function():void {
         displayAPI.flipPage();
@@ -32,6 +33,8 @@ $(document).ready(function():void {
         cpuScorecard = scorecardAPI.initCPUScorecard(allPlayers.splice(0, gameConstant.teamSize));
         userScorecard = scorecardAPI.initPlayerScorecard(allPlayers, cpuScorecard);
     });
+
+
 
     $("#flipBtn").click(function():void {
         console.log("flipBtn");

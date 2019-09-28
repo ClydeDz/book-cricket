@@ -49,6 +49,18 @@ export class DisplayAPI {
         }
     }
 
+    infiniteRoll(rollonElements: string): void {
+        $(rollonElements).each(function() {
+            let thisElement = $(this);
+            if(thisElement.hasClass("active")) {
+                let nextElement = thisElement.next().length > 0 ? thisElement.next() : $(rollonElements).first();
+                thisElement.removeClass("active");                
+                nextElement.addClass("active");
+                return false;
+            }
+        });
+    }
+
     gameOverShenanigans(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
         if(this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard)){
             jQuery("#gameResultsArea #graWinner").show();

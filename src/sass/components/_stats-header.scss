@@ -1,0 +1,8 @@
+#statsHeader .stats-slider {
+    div {
+        display: none;
+        &.active {
+            display: inline-block;
+        }
+    }
+}
