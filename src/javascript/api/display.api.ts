@@ -129,34 +129,41 @@ export class DisplayAPI {
 
     updateScorecardFooter(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
         this.updatePlayerScorecard(playerScorecard);
-        this.updateCPUScorecard(cpuScorecard);
+        this.updateCPUScorecard(cpuScorecard, playerScorecard.overs);
     }
 
     updatePlayerScorecard(playerScorecard: Scorecard): void {
         let scorecardPlayerContent: string = "";
         let linebreak: string = "<br/>";
-
+        let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? 
+                                    playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
+        
         scorecardPlayerContent += `YOU ${linebreak}`;
         scorecardPlayerContent += `Player --- Runs --- Balls --- S/R ${linebreak}`;
         for(let i: number = 0; i < playerScorecard.players.length; i++){
             let player = playerScorecard.players[i];
+            let isOnStrike = i === currentBatsman ? "*" : "";
             let wicketTakenBy = player.wicketTakenBy != "" ? ` (b) ${player.wicketTakenBy}`: "";
-            scorecardPlayerContent += `${player.name}${wicketTakenBy} --- ${player.runs} --- ${player.balls} --- ${player.strikeRate} ${linebreak}`;
+
+            scorecardPlayerContent += `${player.name}${isOnStrike}${wicketTakenBy} --- ${player.runs} --- ${player.balls} --- ${player.strikeRate} ${linebreak}`;
         }
         scorecardPlayerContent += `TOTAL: ${playerScorecard.runs}/${playerScorecard.wickets} --- OVERS: ${playerScorecard.overs} ${linebreak}`;
 
         jQuery("#scorecardFooter #scorecardPlayer").html(scorecardPlayerContent);
     }
 
-    updateCPUScorecard(cpuScorecard: Scorecard): void {
+    updateCPUScorecard(cpuScorecard: Scorecard, oversBowled: number): void {
         let scorecardCPUContent: string = "";
         let linebreak: string = "<br/>";
+        let currentOver: number = this.gameplayEngine.getCurrentOver(oversBowled);
 
         scorecardCPUContent += `CPU ${linebreak}`;
         scorecardCPUContent += `Player --- Runs --- Balls --- Wickets --- Eco. ${linebreak}`;
         for(let i: number = 0; i < cpuScorecard.players.length; i++){
             let player = cpuScorecard.players[i];
-            scorecardCPUContent += `${player.name} --- ${player.runsGiven} --- ${player.balls} --- ${player.wickets} --- ${player.economy} ${linebreak}`;
+            let isCurrentlyBowling = i === currentOver ? "*" : "";
+
+            scorecardCPUContent += `${player.name}${isCurrentlyBowling} --- ${player.runsGiven} --- ${player.balls} --- ${player.wickets} --- ${player.economy} ${linebreak}`;
         }
         scorecardCPUContent += `TOTAL: ${cpuScorecard.runs} --- OVERS: ${cpuScorecard.overs} ${linebreak}`;
 
