@@ -74,6 +74,9 @@ export class DisplayAPI {
         let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
         let batsman: ScorecardPlayer = playerScorecard.players[currentBatsman];
         let bowler: ScorecardPlayer = cpuScorecard.players[currentOver];
+        let ballsRemaining = this.gameConstant.totalBalls - playerScorecard.balls;
+        let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
+        let runsRemaining = this.computationEngine.runsToWin(playerScorecard.runs, targetRuns);
 
         jQuery("#statsHeader #statsPlayerRuns").html(playerScorecard.runs.toString());
         jQuery("#statsHeader #statsPlayerWickets").html(playerScorecard.wickets.toString());
@@ -86,6 +89,8 @@ export class DisplayAPI {
         jQuery("#statsHeader #statsCurrentRunRate").html(playerScorecard.currentRunRate.toString());
         jQuery("#statsHeader #statsRequiredRunRate").html(playerScorecard.requiredRunRate.toString());
         jQuery("#statsHeader #statsProjectedScore").html(playerScorecard.projectedScore.toString());
+        jQuery("#statsHeader #statsRunsRemaining").html(runsRemaining + "");
+        jQuery("#statsHeader #statsBallsRemaining").html(ballsRemaining + "balls");
         
         jQuery("#statsHeader #statsBatsman").html(batsman.name);
         jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
