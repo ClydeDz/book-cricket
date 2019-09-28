@@ -17,12 +17,12 @@ describe("getBookPageNumber", function ():void {
     test("should return expected results", function ():void {
         let gameplayEngine: GameplayEngine = new GameplayEngine();
         let pageNumber: number = gameplayEngine.getBookPageNumber(0, 10);
-        expect(pageNumber).toBeGreaterThan(0);
-        expect(pageNumber).toBeLessThan(10);
+        expect(pageNumber).toBeGreaterThanOrEqual(0);
+        expect(pageNumber).toBeLessThanOrEqual(10);
 
         pageNumber = gameplayEngine.getBookPageNumber(1, 99);
-        expect(pageNumber).toBeGreaterThan(1);
-        expect(pageNumber).toBeLessThan(99);
+        expect(pageNumber).toBeGreaterThanOrEqual(1);
+        expect(pageNumber).toBeLessThanOrEqual(99);
     });
 });
 
@@ -56,5 +56,23 @@ describe("getRandomPlayers", function ():void {
         expect(team.length).toEqual(2);
         expect(team[0].id !== team[1].id).toBeTruthy();
         expect(team[0].name !== team[1].name).toBeTruthy();
+    });
+});
+
+describe("getCurrentBall", function ():void {
+    test("should return expected results", function ():void {
+        let gameplayEngine: GameplayEngine = new GameplayEngine();
+        let ball: number = gameplayEngine.getCurrentBall(26.1);
+        expect(ball).toEqual(1);
+        ball = gameplayEngine.getCurrentBall(0.2);
+        expect(ball).toEqual(2);
+        ball = gameplayEngine.getCurrentBall(2.3);
+        expect(ball).toEqual(3);
+        ball = gameplayEngine.getCurrentBall(4.4);
+        expect(ball).toEqual(4);
+        ball = gameplayEngine.getCurrentBall(1.5);
+        expect(ball).toEqual(5);
+        ball = gameplayEngine.getCurrentBall(1);
+        expect(ball).toEqual(0);
     });
 });

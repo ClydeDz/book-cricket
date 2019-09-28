@@ -11,6 +11,10 @@ export class GameplayEngine {
         return Math.trunc(overs);
     }
 
+    getCurrentBall(overs: number): number {
+        return Math.round((overs % 1) * 10);
+    }
+
     getTargetScore(possibleRuns: number[], totalBalls: number): number {
         possibleRuns.splice(possibleRuns.indexOf(0), 1);
         let zeroRemovedPossibleRuns: number[] = possibleRuns;

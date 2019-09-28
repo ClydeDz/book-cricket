@@ -31,7 +31,7 @@ $(document).ready(function():void {
 
     $("#flipBtn").click(function():void {
         console.log("flipBtn");
-        if(gameplayAPI.isGameOver(userScorecard.balls)) {
+        if(gameplayAPI.isGameOver(userScorecard, cpuScorecard)) {
             gameOverShenanigans();
             return;
         }
@@ -41,7 +41,7 @@ $(document).ready(function():void {
         cpuScorecard = scorecardAPI.updateCPUScorecard(cpuScorecard, runScored.actual, userScorecard);
         userScorecard = scorecardAPI.updatePlayerScorecard(userScorecard, cpuScorecard, runScored.actual);
 
-        if(gameplayAPI.isGameOver(userScorecard.balls)) {
+        if(gameplayAPI.isGameOver(userScorecard, cpuScorecard)) {
             gameOverShenanigans();
             return;
         }

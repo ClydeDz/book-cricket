@@ -26,8 +26,8 @@ export class DisplayAPI {
     }
 
     flipPage(): void {
-        if(this.gameplayAPI.isGameOver(this.playerScorecard.balls)) {
-            // gameOverShenanigans();
+        if(this.gameplayAPI.isGameOver(this.playerScorecard, this.cpuScorecard)) {
+            this.gameOverShenanigans(this.playerScorecard, this.cpuScorecard);
             return;
         }
 
@@ -36,15 +36,23 @@ export class DisplayAPI {
 
         this.cpuScorecard = this.scorecardAPI.updateCPUScorecard(this.cpuScorecard, runScored.actual, this.playerScorecard);
         this.playerScorecard = this.scorecardAPI.updatePlayerScorecard(this.playerScorecard, this.cpuScorecard, runScored.actual);
+        
         this.updateStatsHeader(this.playerScorecard, this.cpuScorecard);
         this.updateScorecardFooter(this.playerScorecard, this.cpuScorecard);
 
-        if(this.gameplayAPI.isGameOver(this.playerScorecard.balls)) {
-            // gameOverShenanigans();
+        if(this.gameplayAPI.isGameOver(this.playerScorecard, this.cpuScorecard)) {
+            this.gameOverShenanigans(this.playerScorecard, this.cpuScorecard);
             return;
         }
     }
-    
+
+    gameOverShenanigans(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
+        let gameResultsMessage: string = this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard) ?
+            "CONGRATULATIONS!!! You won": "Sorry, try again";
+        setTimeout(function() { alert(gameResultsMessage); }, 1000);
+        jQuery("#gamePlayArea #flipPageBtn").hide();
+    }    
+
     // UI updates using JQuery
     // -----------------------
 
@@ -66,13 +74,9 @@ export class DisplayAPI {
         jQuery("#statsHeader #statsCPURuns").html(cpuScorecard.runs.toString());
 
         jQuery("#statsHeader #statsOvers").html(playerScorecard.overs.toString());
-        jQuery("#statsHeader #statsBall1").html(playerScorecard.runs.toString());
-        jQuery("#statsHeader #statsBall2").html(playerScorecard.runs.toString());
-        jQuery("#statsHeader #statsBall3").html(playerScorecard.runs.toString());
-        jQuery("#statsHeader #statsBall4").html(playerScorecard.runs.toString());
-        jQuery("#statsHeader #statsBall5").html(playerScorecard.runs.toString());
-        jQuery("#statsHeader #statsBall6").html(playerScorecard.runs.toString());
-
+        for(let b=0; b<6; b++){
+            jQuery(`#statsHeader #statsBall${(b+1)}`).html(playerScorecard.overHistory[b].toString());
+        }
         jQuery("#statsHeader #statsCurrentRunRate").html(playerScorecard.currentRunRate.toString());
         jQuery("#statsHeader #statsRequiredRunRate").html(playerScorecard.requiredRunRate.toString());
         jQuery("#statsHeader #statsProjectedScore").html(playerScorecard.projectedScore.toString());

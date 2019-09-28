@@ -31,12 +31,24 @@ export class GameplayAPI {
         return { display: bookPagePrefix + runScored, actual: runScored };
     }
 
-    isGameOver(ballsPlayed: number): boolean {
-        return ballsPlayed >= this.gameConstant.totalBalls;
+    isGameOver(playerScorecard: Scorecard, cpuScorecard: Scorecard): boolean {
+        let didPlayerWin = this.didPlayerWin(playerScorecard, cpuScorecard);
+        let allBallsPlayed = this.allBallsPlayed(playerScorecard);
+        let allWicketsFallen = this.allWicketsFallen(playerScorecard);
+
+        return didPlayerWin || allBallsPlayed || allWicketsFallen;
     }
 
     didPlayerWin(playerScorecard: Scorecard, cpuScorecard: Scorecard): boolean {
         return playerScorecard.runs > cpuScorecard.runs;
+    }
+
+    allBallsPlayed(playerScorecard: Scorecard): boolean {
+        return playerScorecard.balls >= this.gameConstant.totalBalls;
+    }
+
+    allWicketsFallen(playerScorecard: Scorecard): boolean {
+        return playerScorecard.wickets >= this.gameConstant.teamSize;
     }
 
 }

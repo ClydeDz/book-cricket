@@ -34,6 +34,7 @@ export class ScorecardAPI {
     updatePlayerScorecard(playerScorecard: Scorecard, cpuScorecard: Scorecard, runScored: number): Scorecard {
         let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+        
         let hasWicketFallen: boolean = runScored === 0;
 
         playerScorecard.players =  this.updatePlayerScorecardPlayers(playerScorecard.players, runScored,
@@ -42,6 +43,8 @@ export class ScorecardAPI {
         playerScorecard.wickets = hasWicketFallen ? ++playerScorecard.wickets: playerScorecard.wickets;
         playerScorecard.runs = playerScorecard.runs + runScored;
         playerScorecard.overs = this.computationEngine.ballsToOvers(playerScorecard.balls);
+        playerScorecard.overHistory = this.updatePlayerScorecardOverHistory(
+            playerScorecard.overHistory, playerScorecard.overs, runScored);
         playerScorecard.currentRunRate = this.computationEngine.runRate(playerScorecard.runs, playerScorecard.overs);
         playerScorecard.requiredRunRate = this.computationEngine.requiredRunRate(
             playerScorecard.runs,playerScorecard.overs,targetRuns,totalOvers);
@@ -67,6 +70,14 @@ export class ScorecardAPI {
 
         players[currentPlayer] = playerOnStrike;
         return players;
+    }
+
+    updatePlayerScorecardOverHistory(overHistory: number[], oversPlayed: number, runsScored: number): number[] {
+        let currentBall: number = this.gameplayEngine.getCurrentBall(oversPlayed);
+        let ball = currentBall === 0 ? 5 : currentBall-1; // TODO: Move this to the engine and add comments
+        overHistory = currentBall === 1 ? [0,0,0,0,0,0]: overHistory;        
+        overHistory[ball] = runsScored;
+        return overHistory;
     }
 
     updateCPUScorecard(cpuScorecard: Scorecard, runScored: number, playerScorecard: Scorecard): Scorecard {
