@@ -1,7 +1,7 @@
 {
-  "name": "test",
+  "name": "book-cricket",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple game of Book Cricket",
   "main": "index.js",
   "scripts": {
     "build:dev": "SET NODE_ENV=local && webpack --config webpack.dev.js",
@@ -9,6 +9,9 @@
     "build:prod": "SET NODE_ENV=production && webpack --config webpack.prod.js",
     "test": "jest --verbose",
     "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "url": "https://github.com/ClydeDz/book-cricket"
   },
   "author": "Clyde D'Souza",
   "license": "ISC",
