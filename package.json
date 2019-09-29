@@ -9,7 +9,9 @@
     "build:prod": "SET NODE_ENV=production && webpack --config webpack.prod.js",
     "test": "jest --verbose",
     "test:coverage": "jest --coverage",
-    "netlify:build": "webpack --config webpack.dev.js",
+    "install": "npm install --save-dev",
+    "build:webpack": "webpack --config webpack.dev.js",
+    "netlify:build": "npm run install && npm run build:webpack",
     "netlify:test+build": "jest --coverage && webpack --config webpack.dev.js"
   },
   "repository": {
