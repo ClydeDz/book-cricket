@@ -11,7 +11,7 @@
     "test:coverage": "jest --coverage",
     "install": "npm install --save-dev",
     "build:webpack": "webpack --config webpack.dev.js",
-    "netlify:build": "npm run install && npm run build:webpack",
+    "netlify:build": "npm run build:webpack",
     "netlify:test+build": "jest --coverage && webpack --config webpack.dev.js"
   },
   "repository": {
