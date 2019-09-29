@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "description": "A simple game of Book Cricket",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "build:dev": "SET NODE_ENV=local && webpack --config webpack.dev.js",
-    "start:dev": "SET NODE_ENV=development && webpack-dev-server --config ./webpack.dev.js --hot --inline && webpack --config webpack.dev.js --watch",
-    "build:prod": "SET NODE_ENV=production && webpack --config webpack.prod.js",
     "test": "jest --verbose",
-    "test:coverage": "jest --coverage",
-    "build:webpack": "webpack --config webpack.dev.js",
-    "netlify:build": "npm run build:webpack",
-    "netlify:test+build": "jest --coverage && webpack --config webpack.dev.js"
+    "test:coverage": "jest --verbose --coverage",
+    "build:webpack-dev": "webpack --config webpack.dev.js",
+    "build:webpack-dev-watch": "webpack --config webpack.dev.js --watch",
+    "build:webpack-prod": "webpack --config webpack.prod.js",
+    "build:webpack-dev-server": "webpack-dev-server --config ./webpack.dev.js --hot --inline",
+    "netlify:build": "npm run build:webpack-prod",
+    "netlify:full-build": "npm run test:coverage && npm run build:webpack-prod",
+    "build:dev": "SET NODE_ENV=local && npm run build:webpack-dev",
+    "build:prod": "SET NODE_ENV=netlify && webpack --config webpack.prod.js",
+    "start:dev": "SET NODE_ENV=development && npm run build:webpack-dev-server && npm run build:webpack-dev-watch"
   },
   "repository": {
     "url": "https://github.com/ClydeDz/book-cricket"
