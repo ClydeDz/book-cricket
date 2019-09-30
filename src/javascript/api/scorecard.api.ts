@@ -70,11 +70,12 @@ export class ScorecardAPI {
         return players;
     }
 
-    updatePlayerScorecardOverHistory(overHistory: number[], oversPlayed: number, runsScored: number): number[] {
+    updatePlayerScorecardOverHistory(overHistory: string[], oversPlayed: number, runsScored: number): string[] {
         let currentBall: number = this.gameplayEngine.getCurrentBall(oversPlayed);
         let ball = currentBall === 0 ? 5 : currentBall-1; // TODO: Move this to the engine and add comments
-        overHistory = currentBall === 1 ? [0,0,0,0,0,0]: overHistory;        
-        overHistory[ball] = runsScored;
+        let runScoredDisplay = runsScored === 0 ? this.gameConstant.statsWicketNotation : runsScored.toString();
+        overHistory = currentBall === 1 ? ["", "", "", "", "", ""]: overHistory;        
+        overHistory[ball] = runScoredDisplay;
         return overHistory;
     }
 

@@ -54,7 +54,7 @@ export class Scorecard {
     balls: number = 0;
     wickets: number = 0;
     overs: number = 0;
-    overHistory: number[] = [0,0,0,0,0,0];
+    overHistory: string[] = ["","", "", "", "", ""];
     currentRunRate: number = 0;
     projectedScore: number = 0;
     requiredRunRate: number = 0;
