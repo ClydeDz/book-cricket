@@ -50,6 +50,7 @@ export class ScorecardPlayer extends Player {
 export class Scorecard {
     players: Array<ScorecardPlayer> = [];
     runs: number = 0;
+    targetRuns: number = 0;
     balls: number = 0;
     wickets: number = 0;
     overs: number = 0;

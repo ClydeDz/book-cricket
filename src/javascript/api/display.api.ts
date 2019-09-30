@@ -77,10 +77,9 @@ export class DisplayAPI {
     // -----------------------
 
     displayPreGameMessage(cpuScorecard: Scorecard): void {
-        let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
 
-        jQuery("#preGameMessage #t").html(targetRuns.toString());
+        jQuery("#preGameMessage #t").html(cpuScorecard.targetRuns.toString());
         jQuery("#preGameMessage #o").html(totalOvers.toString());
     }
 
@@ -90,8 +89,7 @@ export class DisplayAPI {
         let batsman: ScorecardPlayer = playerScorecard.players[currentBatsman];
         let bowler: ScorecardPlayer = cpuScorecard.players[currentOver];
         let ballsRemaining = this.gameConstant.totalBalls - playerScorecard.balls;
-        let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
-        let runsRemaining = this.computationEngine.runsToWin(playerScorecard.runs, targetRuns);
+        let runsRemaining = this.computationEngine.runsToWin(playerScorecard.runs, cpuScorecard.targetRuns);
 
         jQuery("#statsHeader #statsPlayerRuns").html(playerScorecard.runs.toString());
         jQuery("#statsHeader #statsPlayerWickets").html(playerScorecard.wickets.toString());
