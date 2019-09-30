@@ -1,12 +1,15 @@
 import * as $ from "jquery";
 import { DisplayAPI } from "./api/display.api";
+import { GameConstant } from "./constant/game.constant";
 
-console.log("Book cricket console");
 let displayAPI: DisplayAPI = new DisplayAPI();
+let gameConstant: GameConstant = new GameConstant();
 
 $(document).ready(function():void {
     displayAPI.startGame();    
-    var interval = self.setInterval(function(){ displayAPI.infiniteRoll("div.stats-slider>div") },3000);
+    var interval = self.setInterval(function() { 
+        displayAPI.infiniteRoll("div.stats-slider>div"); 
+    }, gameConstant.statsHeaderRotationTimer);
 
     $("#flipPageBtn").click(function():void {
         displayAPI.flipPage();
