@@ -9,7 +9,7 @@ $(document).ready(function():void {
     displayAPI.startGame();    
     var interval = self.setInterval(function() { 
         displayAPI.infiniteRoll("div.stats-slider>div"); 
-    }, gameConstant.statsHeaderRotationTimer);
+    }, gameConstant.statsRotationTimer);
 
     $("#flipPageBtn").click(function():void {
         displayAPI.flipPage();
