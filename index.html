@@ -11,29 +11,6 @@
             <p>You need to make <span id="t"></span> runs in <span id="o"></span> overs.</p>
         </div>
         <div id="game">
-            <div id="statsHeader" data-prefix="stats">
-                <div>
-                    You <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span> 
-                    CPU (<span id="statsCPURuns"></span>)
-                </div>
-                <div>
-                    Overs <span id="statsOvers"></span>
-                    [<span id="statsBall1"></span>|<span id="statsBall2"></span>|<span id="statsBall3"></span>|
-                    <span id="statsBall4"></span>|<span id="statsBall5"></span>|<span id="statsBall6"></span>]
-                </div>
-                <hr/>
-                <div class="stats-slider">
-                    <div class="active">Current run rate: <span id="statsCurrentRunRate"></span></div>
-                    <div>Required run rate: <span id="statsRequiredRunRate"></span></div>
-                    <div>Projected score: <span id="statsProjectedScore"></span></div>
-                    <div>Need <span id="statsRunsRemaining"></span> more to win in <span id="statsBallsRemaining"></span></div>
-                </div>
-                <div>
-                    Batsman: <span id="statsBatsman"></span> | <span id="statsBatsmanStyle"></span> | <span id="statsBatsmanStarPlayer"></span> 
-                    Bowler: <span id="statsBowler"></span> | <span id="statsBowlerStyle"></span> | <span id="statsBowlerStarPlayer"></span> 
-                </div>
-                <hr/>
-            </div>
             <div id="gamePlayArea" data-prefix="gpa">
                     <div>
                         [<span class="gpaRunScored"></span>]
@@ -56,6 +33,47 @@
             <div id="scorecardFooter" data-prefix="scorecard">
                 <div id="scorecardPlayer"></div>
                 <div id="scorecardCPU"></div>
+            </div>
+            <div id="statsHeader" data-prefix="stats" class="row">
+                <div class="column column-1">
+                    <div class="column column-1-a">
+                        Bat <span id="statsBatsmanStarPlayer"></span> <span id="statsBatsman"></span> 
+                        <span id="statsBatsmanRunsMade">0</span> <span id="statsBatsmanBallsPlayed">0</span> 
+                        <br>
+                        <span id="statsBatsmanStyle"></span>
+                    </div>
+                    <div class="stats-slider column column-1-b">
+                        <div class="active">Current run rate: <span id="statsCurrentRunRate"></span></div>
+                        <div>Required run rate: <span id="statsRequiredRunRate"></span></div>
+                        <div>Projected score: <span id="statsProjectedScore"></span></div>
+                        <div>Need <span id="statsRunsRemaining"></span> more to win in <span id="statsBallsRemaining"></span></div>
+                    </div>
+                </div>
+                <div class="column column-2">
+                    <div>
+                        <small>CPU (<span id="statsCPURuns"></span>)</small>
+                    </div>
+                    <div>
+                        You <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span>                         
+                    </div>
+                    <div>
+                        Overs <span id="statsOvers"></span>
+                    </div>                    
+                </div>
+                <div class="column column-3">
+                    <div class="column column-3-a">
+                        Bowl  <span id="statsBowlerStarPlayer"></span>  <span id="statsBowler"></span> 
+                        <span id="statsBowlerRunsGiven">0</span> <span id="statsBowlerBallsBowled">0</span> <br>
+                        <span id="statsBowlerStyle"></span> 
+                    </div>
+                    <div class="column column-3-b">
+                        This over <br>
+                        <div class="this-over">
+                            <span id="statsBall1"></span>|<span id="statsBall2"></span>|<span id="statsBall3"></span>|
+                            <span id="statsBall4"></span>|<span id="statsBall5"></span>|<span id="statsBall6"></span>
+                        </div>                        
+                    </div>
+                </div>
             </div>
         </div>
         <script src="./dist/bundle.js"></script>
