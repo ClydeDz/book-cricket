@@ -1,10 +1,9 @@
 @import "../abstract/colors";
 
 #statsHeader {
-    background-color: $white;
     position: fixed;
-    left: 0;
-    width: 100%;
+    left: -1px;
+    width: 103%;
     bottom: 10%;
 }
 
@@ -13,11 +12,28 @@
         float: left;
         padding: 10px;
         &.column-1, &.column-3 {
-            width: 35%;
+            width: 41%;
+            background-color: $white;
+            border-style:solid;
+            border-color: $black;
+        }
+        &.column-1 {
+            border-width: 2px 2px 2px 0;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        &.column-3 {
+            border-width: 2px 0 2px 2px;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
         }
         &.column-2 {
-            width: 24%;
-            text-align: center;
+            width: 12%;
+            text-align: center;            
+            position: relative;
+            top: -25px;
+            padding-left: 0;
+            padding-right: 0;
         }
     }   
     &:after {
@@ -34,4 +50,28 @@
             display: inline-block;
         }
     }
+}
+
+// Middle column
+#statsHeader .big-score, #statsHeader .small-score  {
+    border-radius: 40px;
+    border: 2px solid $white;
+    text-transform: uppercase;
+}
+#statsHeader .big-score {
+    background: $dark-accent;
+    color: $white;
+    padding: 8px 18px;
+    font-size: larger;
+    font-weight: bold;
+    margin: 2px 0;
+}
+
+#statsHeader .small-score {
+    background: $bright-accent;
+    color: lighten($white, 10%);
+    padding: 5px 12px;
+    font-size: smaller;
+    width: 50%;
+    margin-left: 19px;
 }
