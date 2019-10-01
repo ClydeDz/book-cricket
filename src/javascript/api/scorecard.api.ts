@@ -87,7 +87,7 @@ export class ScorecardAPI {
 
         currentBowler.runsGiven = hasWicketFallen ? currentBowler.runsGiven : currentBowler.runsGiven + runScored;
         currentBowler.wickets = hasWicketFallen ? ++currentBowler.wickets: currentBowler.wickets;
-        currentBowler.balls = ++currentBowler.balls;
+        currentBowler.ballsBowled = ++currentBowler.balls;
         currentBowler.economy = this.computationEngine.bowlingEconomy(currentBowler.balls, currentBowler.runsGiven);
 
         cpuScorecard.players[currentOverFloored] = currentBowler;

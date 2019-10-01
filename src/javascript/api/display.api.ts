@@ -108,9 +108,13 @@ export class DisplayAPI {
         jQuery("#statsHeader #statsBatsman").html(batsman.name);
         jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
         jQuery("#statsHeader #statsBatsmanStarPlayer").html(batsman.starBatsman ? "*": "");
+        jQuery("#statsHeader #statsBatsmanRunsMade").html(batsman.runs.toString());
+        jQuery("#statsHeader #statsBatsmanBallsPlayed").html(batsman.balls.toString());
         jQuery("#statsHeader #statsBowler").html(bowler.name);
         jQuery("#statsHeader #statsBowlerStyle").html(bowler.bowlingStyle);
         jQuery("#statsHeader #statsBowlerStarPlayer").html(bowler.starBowler ? "*": "");
+        jQuery("#statsHeader #statsBowlerRunsGiven").html(bowler.runsGiven.toString());
+        jQuery("#statsHeader #statsBowlerBallsBowled").html(bowler.ballsBowled.toString());
     }
 
     updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
@@ -161,7 +165,7 @@ export class DisplayAPI {
             let player = cpuScorecard.players[i];
             let isCurrentlyBowling = i === currentOver ? "*" : "";
 
-            scorecardCPUContent += `${player.name}${isCurrentlyBowling} --- ${player.runsGiven} --- ${player.balls} --- ${player.wickets} --- ${player.economy} ${linebreak}`;
+            scorecardCPUContent += `${player.name}${isCurrentlyBowling} --- ${player.runsGiven} --- ${player.ballsBowled} --- ${player.wickets} --- ${player.economy} ${linebreak}`;
         }
         scorecardCPUContent += `TOTAL: ${cpuScorecard.runs} --- OVERS: ${cpuScorecard.overs} ${linebreak}`;
 
