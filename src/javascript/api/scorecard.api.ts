@@ -74,7 +74,7 @@ export class ScorecardAPI {
         let currentBall: number = this.gameplayEngine.getCurrentBall(oversPlayed);
         let ball = currentBall === 0 ? 5 : currentBall-1; // TODO: Move this to the engine and add comments
         let runScoredDisplay = runsScored === 0 ? this.gameConstant.statsWicketNotation : runsScored.toString();
-        overHistory = currentBall === 1 ? ["", "", "", "", "", ""]: overHistory;        
+        overHistory = currentBall === 1 ? ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"]: overHistory;        
         overHistory[ball] = runScoredDisplay;
         return overHistory;
     }

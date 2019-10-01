@@ -37,40 +37,53 @@
             <div id="statsHeader" data-prefix="stats" class="row">
                 <div class="column column-1">
                     <div class="column column-1-a">
-                        Bat <span id="statsBatsmanStarPlayer"></span> <span id="statsBatsman"></span> 
-                        <span id="statsBatsmanRunsMade"></span> (<span id="statsBatsmanBallsPlayed"></span>) 
-                        <br>
-                        <span id="statsBatsmanStyle"></span>
+                        <span id="statsBatsmanStarPlayer" class="bright-display"></span><span id="statsBatsman" class="bright-display"></span> 
+                        <span id="statsBatsmanRunsMade" class="bright-display black-display"></span> <span id="statsBatsmanBallsPlayed" class="dark-display"></span>
+                        <br />
+                        <span id="statsBatsmanStyle" class="dark-display"></span>
                     </div>
                     <div class="stats-slider column column-1-b">
-                        <div class="active">Current run rate: <span id="statsCurrentRunRate"></span></div>
-                        <div>Required run rate: <span id="statsRequiredRunRate"></span></div>
-                        <div>Projected score: <span id="statsProjectedScore"></span></div>
-                        <div>Need <span id="statsRunsRemaining"></span> more to win in <span id="statsBallsRemaining"></span></div>
+                        <div class="active">
+                            <span class="bright-display">Current run rate <span id="statsCurrentRunRate" class="black-display"></span></span>
+                        </div>
+                        <div>
+                            <span class="bright-display">Required run rate <span id="statsRequiredRunRate" class="black-display"></span></span>
+                        </div>
+                        <div>
+                            <span class="bright-display">Projected score <span id="statsProjectedScore" class="black-display"></span></span>
+                        </div>
+                        <div>
+                            <span class="bright-display">Need <span id="statsRunsRemaining" class="black-display"></span> more to win</span>
+                            <br>
+                            <span class="dark-display">in <span id="statsBallsRemaining"></span></span> 
+                        </div>
                     </div>
                 </div>
                 <div class="column column-2">
                     <div class="small-score">
-                        <small>CPU (<span id="statsCPURuns"></span>)</small>
+                        <span class="fade-text">CPU <span id="statsCPURuns"></span></span>
                     </div>
                     <div class="big-score">
-                        You <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span>                         
+                        <span class="fade-text">You</span> <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span>                         
                     </div>
                     <div class="small-score">
-                        Overs <span id="statsOvers"></span>
+                        <span class="fade-text">Overs <span id="statsOvers"></span></span>
                     </div>                    
                 </div>
                 <div class="column column-3">
                     <div class="column column-3-a">
-                        Bowl  <span id="statsBowlerStarPlayer"></span>  <span id="statsBowler"></span> 
-                        <span id="statsBowlerRunsGiven"></span> (<span id="statsBowlerBallsBowled"></span>) <br>
-                        <span id="statsBowlerStyle"></span> 
+                        <span id="statsBowlerStarPlayer" class="bright-display"></span><span id="statsBowler" class="bright-display"></span> 
+                        <span id="statsBowlerRunsGiven" class="bright-display black-display"></span> <span id="statsBowlerBallsBowled" class="dark-display"></span>
+                        <br />
+                        <span id="statsBowlerStyle" class="dark-display"></span> 
                     </div>
                     <div class="column column-3-b">
-                        This over <br>
-                        <div class="this-over">
-                            <span id="statsBall1"></span>|<span id="statsBall2"></span>|<span id="statsBall3"></span>|
-                            <span id="statsBall4"></span>|<span id="statsBall5"></span>|<span id="statsBall6"></span>
+                        <span class="this-over bright-display">
+                            <span id="statsBall1"></span><span id="statsBall2"></span><span id="statsBall3"></span><span id="statsBall4"></span><span id="statsBall5"></span><span id="statsBall6"></span>
+                        </span>
+                        <br>
+                        <div class="dark-display">
+                            This over
                         </div>                        
                     </div>
                 </div>

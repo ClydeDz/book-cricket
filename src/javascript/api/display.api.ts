@@ -109,12 +109,12 @@ export class DisplayAPI {
         jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
         jQuery("#statsHeader #statsBatsmanStarPlayer").html(batsman.starBatsman ? "*": "");
         jQuery("#statsHeader #statsBatsmanRunsMade").html(batsman.runs.toString());
-        jQuery("#statsHeader #statsBatsmanBallsPlayed").html(batsman.balls.toString());
+        jQuery("#statsHeader #statsBatsmanBallsPlayed").html(`(${batsman.balls})`);
         jQuery("#statsHeader #statsBowler").html(bowler.name);
         jQuery("#statsHeader #statsBowlerStyle").html(bowler.bowlingStyle);
         jQuery("#statsHeader #statsBowlerStarPlayer").html(bowler.starBowler ? "*": "");
         jQuery("#statsHeader #statsBowlerRunsGiven").html(bowler.runsGiven.toString());
-        jQuery("#statsHeader #statsBowlerBallsBowled").html(bowler.ballsBowled.toString());
+        jQuery("#statsHeader #statsBowlerBallsBowled").html(`(${bowler.ballsBowled})`);
     }
 
     updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
