@@ -1,18 +1,9 @@
 @import "../abstract/colors";
+@import "../abstract/mixins";
+@import "../abstract/variables";
 
-@mixin dark-accent-background-gradient($left-color, $right-color) {
-    background: $right-color;
-    // background: -webkit-linear-gradient(to bottom,$left-color, $right-color,  $right-color);  
-    background: linear-gradient(to right, $left-color, $right-color,  $right-color); 
-}
-@mixin comet-gradient-effect($left-color, $right-color) {
-    background: $left-color;
-    // background: -webkit-gradient(linear, 100% 0, 0 0, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
-    // background: -webkit-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-    // background: -moz-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-    // background: -o-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-    background: linear-gradient(to right, rgba($left-color, 0) 0%, rgba($right-color, 1) 100%);
-}
+// Structuring stats header and its columns 
+
 #statsHeader {
     position: fixed;
     left: -1px;
@@ -25,33 +16,30 @@
     .column {
         float: left;
         padding: 10px;
-        &.column-1, &.column-3,
-        &.column-4, &.column-5,
-        &.column-2  {
+
+        &.column-1, &.column-3, &.column-4, 
+        &.column-5, &.column-2  {
             min-height: 40px;
             padding: 7px 23px 7px 28px;
         }
         &.column-1, &.column-3 {
             @include dark-accent-background-gradient(darken($white, 10), $white);
             width: 17%;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            box-shadow: $component-shadow;
+            margin-left: 2px;
         }
         &.column-4, &.column-5 {
             @include dark-accent-background-gradient(darken($white, 5), $white);
-            border-radius: 50px;
+            border-radius: $component-border-radius;
             width: 18%;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            box-shadow: $component-shadow;
             padding-top: 8px;
         }
         &.column-1 {
-            border-top-right-radius: 50px;
-            border-bottom-right-radius: 50px;
-            margin-right: 2px;
+            @include border-radius-corners($component-border-radius, $component-border-radius, 0, 0);
         }
         &.column-3 {
-            border-top-left-radius: 50px;
-            border-bottom-left-radius: 50px;
-            margin-left: 2px;
+            @include border-radius-corners( 0, 0, $component-border-radius, $component-border-radius);
         }
         &.column-2 {
             width: 12%;
@@ -70,6 +58,7 @@
     } 
 }
 
+// TODO: Move stats slider as its own component and rename
 #statsHeader .stats-slider {
     div {
         display: none;
@@ -79,18 +68,20 @@
     }
 }
 
-// Middle column
+
+// Central score styling
+
 #statsHeader .big-score, 
 #statsHeader .big-score div:first-child, 
 #statsHeader .small-score  {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: $component-shadow;
     border-radius: 40px;
-    // border: 2px solid $white;
     text-transform: uppercase;
+    color: $white;
 }
+
 #statsHeader .big-score {
     background-color: $dark-accent;
-    color: $white;
     font-size: larger;
     font-weight: bold;
     margin: 2px 0;
@@ -103,14 +94,15 @@
 
 #statsHeader .small-score {
     background: $bright-accent;
-    color: $white;
     padding: 5px 12px;
     font-size: small;
     width: 50%;
     margin-left: 35px;
 }
 
-// All
+
+// Other styling for this component
+
 #statsHeader .bright-display {
     color: $bright-accent;
     font-weight: 800;
@@ -119,12 +111,14 @@
     word-spacing: 2px;
     text-shadow: none;
 }
+
 #statsHeader .dark-display {
     color: $dark-accent;
     font-size: small;
     letter-spacing: 1px;
     font-weight: 600;
 }
+
 #statsHeader .black-display {
     color: $black;
     font-size: large;
@@ -133,6 +127,7 @@
 
 #statsHeader .this-over {
     margin-left: -3px;
+
     span {
         @include dark-accent-background-gradient(rgba($bright-accent, 0.04), rgba($bright-accent, 0.09));
         margin-right: 1px;
@@ -144,9 +139,3 @@
         border-radius: 90px;
     }
 }
-
-// General
-
-// .fade-text {
-//     opacity: 0.8;
-// }

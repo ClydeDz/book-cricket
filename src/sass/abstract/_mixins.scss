@@ -1,0 +1,21 @@
+
+@mixin dark-accent-background-gradient($left-color, $right-color) {
+    background: $right-color;
+    // background: -webkit-linear-gradient(to bottom,$left-color, $right-color,  $right-color);  
+    background: linear-gradient(to right, $left-color, $right-color,  $right-color); 
+}
+@mixin comet-gradient-effect($left-color, $right-color) {
+    background: $left-color;
+    // background: -webkit-gradient(linear, 100% 0, 0 0, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+    // background: -webkit-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    // background: -moz-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    // background: -o-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(to right, rgba($left-color, 0) 0%, rgba($right-color, 1) 100%);
+}
+
+@mixin border-radius-corners($top-right, $bottom-right, $bottom-left, $top-left){
+    border-top-right-radius: $top-right;
+    border-bottom-right-radius: $bottom-right;
+    border-bottom-left-radius: $bottom-left;   
+    border-top-left-radius: $top-left; 
+}
