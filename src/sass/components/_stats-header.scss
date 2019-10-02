@@ -2,9 +2,16 @@
 
 @mixin dark-accent-background-gradient($left-color, $right-color) {
     background: $right-color;
-    background: -webkit-linear-gradient(to right,$left-color, $right-color);  
-    background: linear-gradient(to right, $left-color, $right-color); 
-
+    // background: -webkit-linear-gradient(to bottom,$left-color, $right-color,  $right-color);  
+    background: linear-gradient(to bottom, $left-color, $right-color,  $right-color); 
+}
+@mixin comet-gradient-effect($left-color, $right-color) {
+    background: $left-color;
+    // background: -webkit-gradient(linear, 100% 0, 0 0, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+    // background: -webkit-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    // background: -moz-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    // background: -o-linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(to right, rgba($left-color, 0) 0%, rgba($right-color, 1) 100%);
 }
 #statsHeader {
     position: fixed;
@@ -18,11 +25,16 @@
     .column {
         float: left;
         padding: 10px;
+        
+
         &.column-1, &.column-3 {
+            // @include dark-accent-background-gradient($bright-accent, $dark-accent);
             @include dark-accent-background-gradient(darken($white, 5), $white);
             width: 41%;
-            border-style:solid;
+            // border-style:solid;
             border-color: $black;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            padding: 0 10px;
         }
         &.column-1 {
             border-width: 2px 2px 2px 0;
@@ -41,6 +53,7 @@
             top: -25px;
             padding-left: 0;
             padding-right: 0;
+            margin: 0 4px;
         }
         &.column-1-a, &.column-3-a {
             min-width: 42%;
@@ -63,18 +76,25 @@
 }
 
 // Middle column
-#statsHeader .big-score, #statsHeader .small-score  {
+#statsHeader .big-score, 
+#statsHeader .big-score div:first-child, 
+#statsHeader .small-score  {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 40px;
-    border: 2px solid $white;
+    // border: 2px solid $white;
     text-transform: uppercase;
 }
 #statsHeader .big-score {
-    @include dark-accent-background-gradient($bright-accent, $dark-accent);
+    background-color: $dark-accent;
     color: $white;
-    padding: 8px 18px;
     font-size: larger;
     font-weight: bold;
     margin: 2px 0;
+ 
+    div {
+        @include comet-gradient-effect($dark-accent, $bright-accent);
+        padding: 3px 1px;
+    }
 }
 
 #statsHeader .small-score {
@@ -115,6 +135,6 @@
 
 // General
 
-.fade-text {
-    opacity: 0.8;
-}
+// .fade-text {
+//     opacity: 0.8;
+// }
