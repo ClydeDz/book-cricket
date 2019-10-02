@@ -58,17 +58,6 @@
     } 
 }
 
-// TODO: Move stats slider as its own component and rename
-#statsHeader .stats-slider {
-    div {
-        display: none;
-        &.active {
-            display: inline-block;
-        }
-    }
-}
-
-
 // Central score styling
 
 #statsHeader .big-score, 
