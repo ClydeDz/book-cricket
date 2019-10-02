@@ -24,6 +24,9 @@
             <div id="gameResultsArea" data-prefix="gra">
                 <div id="graWinner">
                     <p>CONGRATULATIONS!!! You won</p>
+                    <div class="small-score">
+                            <span class="fade-text">CPU <span id="statsCPURuns"></span></span>
+                        </div>
                 </div>
                 <div id="graLoser">
                     <p>Sorry, try again</p>
@@ -60,17 +63,15 @@
                     </div>
                 </div>
                 <div class="column column-2">
-                    <div class="small-score">
-                        <span class="fade-text">CPU <span id="statsCPURuns"></span></span>
-                    </div>
                     <div class="big-score">
                         <div>
                             <span class="fade-text">You</span> <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span>                         
-                        </div>                        
+                            <div class="small-score">
+                                <span class="fade-text">Overs <span id="statsOvers"></span></span>
+                            </div>   
+                        </div>           
                     </div>
-                    <div class="small-score">
-                        <span class="fade-text">Overs <span id="statsOvers"></span></span>
-                    </div>                    
+                                   
                 </div>
                 <div class="column column-3">
                     <div class="column column-3-a">
