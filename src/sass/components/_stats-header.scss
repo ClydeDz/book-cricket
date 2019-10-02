@@ -3,7 +3,7 @@
 @mixin dark-accent-background-gradient($left-color, $right-color) {
     background: $right-color;
     // background: -webkit-linear-gradient(to bottom,$left-color, $right-color,  $right-color);  
-    background: linear-gradient(to bottom, $left-color, $right-color,  $right-color); 
+    background: linear-gradient(to right, $left-color, $right-color,  $right-color); 
 }
 @mixin comet-gradient-effect($left-color, $right-color) {
     background: $left-color;
@@ -113,22 +113,28 @@
 // All
 #statsHeader .bright-display {
     color: $bright-accent;
-    font-weight: bold;
+    font-weight: 800;
     font-size: large;
+    letter-spacing: -0.5px;
+    word-spacing: 2px;
+    text-shadow: none;
 }
 #statsHeader .dark-display {
     color: $dark-accent;
     font-size: small;
     letter-spacing: 1px;
+    font-weight: 600;
 }
 #statsHeader .black-display {
     color: $black;
     font-size: large;
+    font-weight: 600;
 }
 
 #statsHeader .this-over {
+    margin-left: -3px;
     span {
-        background-color: rgba($bright-accent, 0.09);
+        @include dark-accent-background-gradient(rgba($bright-accent, 0.04), rgba($bright-accent, 0.09));
         margin-right: 1px;
         padding: 1px 8px;
         display: inline-block;
