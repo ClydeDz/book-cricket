@@ -25,26 +25,33 @@
     .column {
         float: left;
         padding: 10px;
-        
-
+        &.column-1, &.column-3,
+        &.column-4, &.column-5,
+        &.column-2  {
+            min-height: 40px;
+            padding: 7px 23px 7px 28px;
+        }
         &.column-1, &.column-3 {
-            // @include dark-accent-background-gradient($bright-accent, $dark-accent);
-            @include dark-accent-background-gradient(darken($white, 5), $white);
-            width: 41%;
-            // border-style:solid;
-            border-color: $black;
+            @include dark-accent-background-gradient(darken($white, 10), $white);
+            width: 17%;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            padding: 0 10px;
+        }
+        &.column-4, &.column-5 {
+            @include dark-accent-background-gradient(darken($white, 5), $white);
+            border-radius: 50px;
+            width: 18%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            padding-top: 8px;
         }
         &.column-1 {
-            border-width: 2px 2px 2px 0;
             border-top-right-radius: 50px;
             border-bottom-right-radius: 50px;
+            margin-right: 2px;
         }
         &.column-3 {
-            border-width: 2px 0 2px 2px;
             border-top-left-radius: 50px;
             border-bottom-left-radius: 50px;
+            margin-left: 2px;
         }
         &.column-2 {
             width: 12%;
@@ -54,9 +61,6 @@
             padding-left: 0;
             padding-right: 0;
             margin: 0 4px;
-        }
-        &.column-1-a, &.column-3-a {
-            min-width: 42%;
         }
     }   
     &:after {
@@ -124,12 +128,14 @@
 
 #statsHeader .this-over {
     span {
-        background-color: rgba($bright-accent, 0.1);
+        background-color: rgba($bright-accent, 0.09);
         margin-right: 1px;
         padding: 1px 8px;
         display: inline-block;
-        width: 10px;
-        height: 26px;
+        width: 13px;
+        height: 24px;
+        text-align: center;
+        border-radius: 90px;
     }
 }
 
