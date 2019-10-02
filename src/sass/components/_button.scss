@@ -1,0 +1,28 @@
+@import "../abstract/variables";
+@import "../abstract/mixins";
+
+.action-button {
+    background-color: $dark-accent;
+    padding: 3px 1px 3px 9px;
+    border: none;
+    color: $white;
+    font-size: large;
+    font-weight: 800;
+    outline: none;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    &:hover, &:focus {
+        background-color: lighten($dark-accent, 1);
+    }
+
+    span {
+        @include comet-gradient-effect($dark-accent, $bright-accent);    
+        padding: 12px 12px;    
+    }
+
+    &, & span{
+        border-radius: $component-border-radius;
+    }
+}
