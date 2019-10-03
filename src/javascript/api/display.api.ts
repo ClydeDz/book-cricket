@@ -93,7 +93,7 @@ export class DisplayAPI {
 
         jQuery("#statsHeader #statsPlayerRuns").html(playerScorecard.runs.toString());
         jQuery("#statsHeader #statsPlayerWickets").html(playerScorecard.wickets.toString());
-        jQuery("#statsHeader #statsCPURuns").html(cpuScorecard.runs.toString());
+        jQuery("#statsHeader #statsTargetRuns").html(cpuScorecard.targetRuns.toString());
 
         jQuery("#statsHeader #statsOvers").html(playerScorecard.overs.toString());
         for(let b=0; b<6; b++){
