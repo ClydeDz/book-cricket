@@ -1,0 +1,18 @@
+.bat-icon, .ball-icon {
+    position: fixed;
+    opacity: 0.09;
+}
+
+.bat-icon {
+    width: 9px;
+    bottom: 5.2%;
+    left: 18.5%;    
+    transform: rotate(20deg);
+}
+
+.ball-icon {
+    width: 38px;
+    bottom: 6%;
+    right: -21px;
+    transform: rotate(79deg);
+}
