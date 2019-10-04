@@ -1,3 +1,96 @@
+@import "../abstract/colors";
+@import "../abstract/mixins";
+
 #scorecardFooter {
-    display: none;
+    #scorecardCPU {
+        display: none;
+    }    
 }
+
+#scorecardBtn {
+    position: fixed;
+    top: 3%;
+    right: 3%;
+}
+
+#scorecardFooter .scorecard-table {
+    width: 50%;
+    margin: auto;
+
+    .scorecard-table-body, .scorecard-table-header, .scorecard-table-footer {
+        float: left;
+        padding: 10px; 
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    }   
+    .scorecard-table-column-1 {
+        width: 40%;
+        display: inline-block;
+    }
+    .scorecard-table-column-2 {
+        width: 18%;
+        display: inline-block;
+    }
+    .scorecard-table-column-3 {
+        width: 18%;
+        display: inline-block;
+    }
+    .scorecard-table-column-4 {
+        width: 18%;
+        display: inline-block;
+    }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    } 
+}
+
+#scorecardFooter .scorecard-table {
+    .scorecard-table-title, .scorecard-table-header, .scorecard-table-footer {
+        background-color: $dark-accent;
+        padding: 0;
+        border-radius: 50px;
+
+        & > span {
+            @include comet-gradient-effect($dark-accent, $bright-accent);  
+            display: block;    
+            width: 100%;
+            padding: 8px 0;
+            border-radius: 50px;
+        }
+    }
+    .scorecard-table-title {
+        span {
+            // display: grid;
+        }
+     }
+     
+    .scorecard-table-header {
+        width: 80%;
+        margin-left: 63px;
+    }
+}
+
+#scorecardFooter .scorecard-table {
+    .scorecard-table-body {
+        background-color: $white;
+        padding: 10px 19px;
+        border-radius: 20px;
+        width: 93%;
+
+        // span {
+        //     @include comet-gradient-effect($dark-accent, $bright-accent);  
+        //     content: ' ';
+        //     display: block;    
+        //     width: 100%;
+        //     padding: 8px 0;
+        //     border-radius: 50px;
+        // }
+    }
+}
+
+.pull-right {
+    float: right;
+}
+

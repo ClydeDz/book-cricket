@@ -18,4 +18,8 @@ $(document).ready(function():void {
     $("#playAgainBtn").click(function():void {
         displayAPI.startGame();
     });
+
+    $("#scorecardBtn").click(function():void {
+        displayAPI.toggleScorecard();
+    });
 });

@@ -21,6 +21,7 @@ export class DisplayAPI {
         this.cpuScorecard = this.scorecardAPI.initCPUScorecard(allPlayers.splice(0, this.gameConstant.teamSize));
         this.playerScorecard = this.scorecardAPI.initPlayerScorecard(allPlayers, this.cpuScorecard);
 
+        this.toggleScorecard();
         this.resetGameResultsArea();
         this.resetGamePlayArea();
         this.displayPreGameMessage(this.cpuScorecard);
@@ -59,6 +60,10 @@ export class DisplayAPI {
                 return false;
             }
         });
+    }
+
+    toggleScorecard(): void {
+        jQuery("#scorecardFooter").toggle();
     }
 
     gameOverShenanigans(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
@@ -135,22 +140,43 @@ export class DisplayAPI {
     }
 
     updatePlayerScorecard(playerScorecard: Scorecard): void {
-        let scorecardPlayerContent: string = "";
+        let scorecardPlayerContent: string = "<div class='scorecard-table'>";
         let linebreak: string = "<br/>";
         let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? 
                                     playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
         
-        scorecardPlayerContent += `YOU ${linebreak}`;
-        scorecardPlayerContent += `Player --- Runs --- Balls --- S/R ${linebreak}`;
+        scorecardPlayerContent += `<div class='scorecard-table-title'><span>
+            <span class='pull-left'>Scorecard</span>
+            <span class='pull-right'>You</span>`;
+        scorecardPlayerContent += `</span></div>`;
+        scorecardPlayerContent += `<div class='scorecard-table-header'>`;
+        scorecardPlayerContent += `<span>
+            <div class='scorecard-table-column-1'>Player</div>
+            <div class='scorecard-table-column-2'>Runs</div>
+            <div class='scorecard-table-column-3'>Balls</div>
+            <div class='scorecard-table-column-4'>S/R</div>`;
+        scorecardPlayerContent += `</span></div>`;
+
+        scorecardPlayerContent += `<div class='scorecard-table-body'>`;
         for(let i: number = 0; i < playerScorecard.players.length; i++){
             let player = playerScorecard.players[i];
             let isOnStrike = i === currentBatsman ? "*" : "";
             let wicketTakenBy = player.wicketTakenBy != "" ? ` (b) ${player.wicketTakenBy}`: "";
 
-            scorecardPlayerContent += `${player.name}${isOnStrike}${wicketTakenBy} --- ${player.runs} --- ${player.balls} --- ${player.strikeRate} ${linebreak}`;
+            scorecardPlayerContent += `
+            <div class='scorecard-table-column-1'>${player.name}${isOnStrike}${wicketTakenBy}</div>
+            <div class='scorecard-table-column-2'>${player.runs}</div>
+            <div class='scorecard-table-column-3'>${player.balls}</div>
+            <div class='scorecard-table-column-4'>${player.strikeRate}</div>`;
         }
-        scorecardPlayerContent += `TOTAL: ${playerScorecard.runs}/${playerScorecard.wickets} --- OVERS: ${playerScorecard.overs} ${linebreak}`;
+        scorecardPlayerContent += `</div>`;
 
+        scorecardPlayerContent += `<div class='scorecard-table-footer'><span>
+            <span class='pull-left'>TOTAL: ${playerScorecard.runs}/${playerScorecard.wickets}</span>
+            <span class='pull-right'>OVERS: ${playerScorecard.overs}</span>
+            </span></div>`;
+
+        scorecardPlayerContent += "</div>"
         jQuery("#scorecardFooter #scorecardPlayer").html(scorecardPlayerContent);
     }
 
