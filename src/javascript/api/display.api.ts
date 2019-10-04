@@ -141,7 +141,6 @@ export class DisplayAPI {
 
     updatePlayerScorecard(playerScorecard: Scorecard): void {
         let scorecardPlayerContent: string = "<div class='scorecard-table'>";
-        let linebreak: string = "<br/>";
         let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? 
                                     playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
         
@@ -164,10 +163,10 @@ export class DisplayAPI {
             let wicketTakenBy = player.wicketTakenBy != "" ? ` (b) ${player.wicketTakenBy}`: "";
 
             scorecardPlayerContent += `
-            <div class='scorecard-table-column-1'>${player.name}${isOnStrike}${wicketTakenBy}</div>
-            <div class='scorecard-table-column-2'>${player.runs}</div>
-            <div class='scorecard-table-column-3'>${player.balls}</div>
-            <div class='scorecard-table-column-4'>${player.strikeRate}</div>`;
+                <div class='scorecard-table-column-1'>${player.name}${isOnStrike}${wicketTakenBy}</div>
+                <div class='scorecard-table-column-2'>${player.runs}</div>
+                <div class='scorecard-table-column-3'>${player.balls}</div>
+                <div class='scorecard-table-column-4'>${player.strikeRate}</div>`;
         }
         scorecardPlayerContent += `</div>`;
 
@@ -181,20 +180,43 @@ export class DisplayAPI {
     }
 
     updateCPUScorecard(cpuScorecard: Scorecard, oversBowled: number): void {
-        let scorecardCPUContent: string = "";
-        let linebreak: string = "<br/>";
+        let scorecardCPUContent: string = "<div class='scorecard-table scorecard-table-extra-column'>";
         let currentOver: number = this.gameplayEngine.getCurrentOver(oversBowled);
 
-        scorecardCPUContent += `CPU ${linebreak}`;
-        scorecardCPUContent += `Player --- Runs --- Balls --- Wickets --- Eco. ${linebreak}`;
+        scorecardCPUContent += `<div class='scorecard-table-title'><span>
+            <span class='pull-left'>Scorecard</span>
+            <span class='pull-right'>CPU</span>`;
+        scorecardCPUContent += `</span></div>`;
+        scorecardCPUContent += `<div class='scorecard-table-header'>`;
+        scorecardCPUContent += `<span>
+            <div class='scorecard-table-column-1'>Player</div>
+            <div class='scorecard-table-column-2'>Runs given</div>
+            <div class='scorecard-table-column-3'>Balls</div>
+            <div class='scorecard-table-column-4'>Wickets</div>
+            <div class='scorecard-table-column-5'>Eco</div>`;
+            scorecardCPUContent += `</span></div>`;
+
+        scorecardCPUContent += `<div class='scorecard-table-body'>`;
+
         for(let i: number = 0; i < cpuScorecard.players.length; i++){
             let player = cpuScorecard.players[i];
             let isCurrentlyBowling = i === currentOver ? "*" : "";
 
-            scorecardCPUContent += `${player.name}${isCurrentlyBowling} --- ${player.runsGiven} --- ${player.ballsBowled} --- ${player.wickets} --- ${player.economy} ${linebreak}`;
+            scorecardCPUContent += `
+                <div class='scorecard-table-column-1'>${player.name}${isCurrentlyBowling}</div>
+                <div class='scorecard-table-column-2'>${player.runsGiven}</div>
+                <div class='scorecard-table-column-3'>${player.ballsBowled}</div>
+                <div class='scorecard-table-column-4'>${player.wickets}</div>
+                <div class='scorecard-table-column-5'>${player.economy}</div>`;
         }
-        scorecardCPUContent += `TOTAL: ${cpuScorecard.runs} --- OVERS: ${cpuScorecard.overs} ${linebreak}`;
+        scorecardCPUContent += `</div>`;
 
+        scorecardCPUContent += `<div class='scorecard-table-footer'><span>
+            <span class='pull-left'>TOTAL: ${cpuScorecard.runs}</span>
+            <span class='pull-right'>OVERS: ${cpuScorecard.overs}</span>
+            </span></div>`;
+
+        scorecardCPUContent += "</div>";
         jQuery("#scorecardFooter #scorecardCPU").html(scorecardCPUContent);
     }
 

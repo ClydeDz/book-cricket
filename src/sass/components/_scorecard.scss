@@ -2,7 +2,10 @@
 @import "../abstract/mixins";
 
 #scorecardFooter {
-    #scorecardCPU {
+    // #scorecardCPU {
+    //     display: none;
+    // }
+    #scorecardPlayer {
         display: none;
     }    
 }
@@ -28,7 +31,8 @@
         width: 60%;
         display: inline-block;
     }
-    .scorecard-table-column-2, .scorecard-table-column-3, .scorecard-table-column-4 {
+    .scorecard-table-column-2, .scorecard-table-column-3,
+    .scorecard-table-column-4, .scorecard-table-column-5 {
         width: 12%;
         display: inline-block;
     }
@@ -107,17 +111,28 @@
             word-spacing: 2px;
             line-height: 1.5;
         }
-        // span {
-        //     @include comet-gradient-effect($dark-accent, $bright-accent);  
-        //     content: ' ';
-        //     display: block;    
-        //     width: 100%;
-        //     padding: 8px 0;
-        //     border-radius: 50px;
-        // }
     }
 }
 
+#scorecardFooter .scorecard-table.scorecard-table-extra-column {
+    .scorecard-table-header {
+        .scorecard-table-column-1 {
+            width: 33%;
+        } 
+        .scorecard-table-column-2, .scorecard-table-column-3 {
+            width: 16.5%;
+        }
+        .scorecard-table-column-4 {
+            margin-left: -10px;
+        }       
+        .scorecard-table-column-5 {
+            margin-left: 22px;
+        }       
+    }
+    .scorecard-table-column-1 {
+        width: 41%;        
+    }
+}
 .pull-right {
     float: right;
 }
