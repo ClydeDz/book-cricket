@@ -22,4 +22,8 @@ $(document).ready(function():void {
     $("#scorecardBtn").click(function():void {
         displayAPI.toggleScorecard();
     });
+
+    $("#togglePlayerCPUScorecardBtn").click(function():void {
+        displayAPI.togglePlayerCPUScorecard();
+    });
 });

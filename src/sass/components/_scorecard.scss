@@ -1,15 +1,6 @@
 @import "../abstract/colors";
 @import "../abstract/mixins";
 
-#scorecardFooter {
-    // #scorecardCPU {
-    //     display: none;
-    // }
-    #scorecardPlayer {
-        display: none;
-    }    
-}
-
 #scorecardBtn {
     position: fixed;
     top: 3%;
@@ -137,3 +128,9 @@
     float: right;
 }
 
+
+// Scorecard slider 
+.scorecard-slider {
+    margin: auto;
+    width: 25%;
+}

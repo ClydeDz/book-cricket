@@ -21,6 +21,7 @@ export class DisplayAPI {
         this.cpuScorecard = this.scorecardAPI.initCPUScorecard(allPlayers.splice(0, this.gameConstant.teamSize));
         this.playerScorecard = this.scorecardAPI.initPlayerScorecard(allPlayers, this.cpuScorecard);
 
+        this.initializePlayerCPUScorecard();
         this.toggleScorecard();
         this.resetGameResultsArea();
         this.resetGamePlayArea();
@@ -64,6 +65,22 @@ export class DisplayAPI {
 
     toggleScorecard(): void {
         jQuery("#scorecardFooter").toggle();
+    }
+
+    initializePlayerCPUScorecard(): void {
+        jQuery("#scorecardFooter #scorecardPlayer").show();
+        jQuery("#scorecardFooter #scorecardCPU").hide();
+    }
+
+    togglePlayerCPUScorecard(): void {
+        let isViewCPUScorecardBtn = jQuery("#scorecardFooter #togglePlayerCPUScorecardBtn").hasClass("view-cpu-scorecard");
+        let viewPlayerCPUScorecardBtnText = isViewCPUScorecardBtn ? "View Player Scorecard" : "View CPU Scorecard";
+        
+        jQuery("#scorecardFooter #togglePlayerCPUScorecardBtn span").html(viewPlayerCPUScorecardBtnText);
+        jQuery("#scorecardFooter #togglePlayerCPUScorecardBtn").toggleClass("view-cpu-scorecard");
+        jQuery("#scorecardFooter #togglePlayerCPUScorecardBtn").toggleClass("view-player-scorecard");
+        jQuery("#scorecardFooter #scorecardPlayer").toggle();
+        jQuery("#scorecardFooter #scorecardCPU").toggle();        
     }
 
     gameOverShenanigans(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
@@ -171,8 +188,8 @@ export class DisplayAPI {
         scorecardPlayerContent += `</div>`;
 
         scorecardPlayerContent += `<div class='scorecard-table-footer'><span>
-            <span class='pull-left'>TOTAL: ${playerScorecard.runs}/${playerScorecard.wickets}</span>
-            <span class='pull-right'>OVERS: ${playerScorecard.overs}</span>
+            <span class='pull-left'>Total ${playerScorecard.runs}/${playerScorecard.wickets}</span>
+            <span class='pull-right'>Overs ${playerScorecard.overs}</span>
             </span></div>`;
 
         scorecardPlayerContent += "</div>"
@@ -212,8 +229,8 @@ export class DisplayAPI {
         scorecardCPUContent += `</div>`;
 
         scorecardCPUContent += `<div class='scorecard-table-footer'><span>
-            <span class='pull-left'>TOTAL: ${cpuScorecard.runs}</span>
-            <span class='pull-right'>OVERS: ${cpuScorecard.overs}</span>
+            <span class='pull-left'>Total ${cpuScorecard.runs}</span>
+            <span class='pull-right'>Overs ${cpuScorecard.overs}</span>
             </span></div>`;
 
         scorecardCPUContent += "</div>";
