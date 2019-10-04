@@ -51,4 +51,19 @@ export class GameplayAPI {
         return playerScorecard.wickets >= this.gameConstant.teamSize;
     }
 
+    getScorePanelImage(score: number, isDuckOut: boolean): string {
+        let imageIdentifier = this.gameplayEngine.getRandomNumberWithinRange(1,3);
+        if(isDuckOut){
+            return `duckout-${imageIdentifier}`;
+        }
+
+        let imageName = score === 0 ? "out" : 
+            (score === 2 ? "two" :
+                (score === 4 ? "four" : 
+                    (score === 6 ? "six" : "eight")
+                )
+            );
+        return `${imageName}-${imageIdentifier}`;
+    }
+
 }

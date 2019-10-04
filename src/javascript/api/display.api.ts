@@ -142,12 +142,13 @@ export class DisplayAPI {
     updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
         let isDuckOut = playerScorecard.players[playerScorecard.wickets].runs === 0 
                             && runScored.actual === 0;
+        let scorePanelImage = this.gameplayAPI.getScorePanelImage(runScored.actual, isDuckOut);
 
         jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
-        jQuery("#gamePlayArea .gpaRunScored").html(runScored.actual.toString());        
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/${scorePanelImage}.gif" />`);        
 
         if(isDuckOut) {
-            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html("Duck out");        
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/${scorePanelImage}.gif" />`);        
         }
     }
 
@@ -247,7 +248,7 @@ export class DisplayAPI {
 
     resetGamePlayArea(): void {
         jQuery("#gamePlayArea #gpaPageFlipped").html("0");
-        jQuery("#gamePlayArea .gpaRunScored").html("");        
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/static.gif" />`);           
         jQuery("#gamePlayArea #flipPageBtn").show();
     }
 }
