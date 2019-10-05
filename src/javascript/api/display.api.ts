@@ -266,7 +266,7 @@ export class DisplayAPI {
 
     resetGamePlayArea(): void {
         jQuery("#gamePlayArea #gpaPageFlipped").html("0");
-        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/static.gif" />`);           
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/countdown.gif" />`);           
         jQuery("#gamePlayArea #flipPageBtn").show();
     }
 }
