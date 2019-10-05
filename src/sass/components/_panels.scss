@@ -1,4 +1,5 @@
 @import "../abstract/variables";
+@import "../abstract/colors";
 
 #gamePlayArea {
     span {
@@ -6,38 +7,68 @@
     }
     .panel-1 {
         left: 8%;
-        top: 115px;
+        top: 50px;
         img {
-            transform: perspective(599px) rotateY(29deg) rotateX(-20deg) rotateZ(5deg);
+            transform:perspective(599px) rotateY(29deg) rotateX(-20deg) rotate(7deg);
         }
     }
     .panel-2 {
         left: 12%;
-        top: 122px;
+        top: 65px;
         img {
-            transform: perspective(599px) rotateY(28deg) rotateX(-20deg) rotateZ(4deg);    
+            transform: perspective(599px) rotateY(28deg) rotateX(-20deg) rotateZ(7deg);    
         }        
     }
     .panel-3 {
-        left: 30%;
-        top: 42px;
-        img {
-            transform: perspective(599px) rotateY(-1deg) rotateX(-13deg) rotateZ(0deg);    
-        }        
+        left: 22%;
+        top: 170px;
+        // img {
+        //     transform: perspective(599px) rotateY(-1deg) rotateX(-13deg) rotateZ(0deg);    
+        // }        
     }
     .panel-4 {
-        left: 42%;
-        top: 126px;
-        img {
-            transform: perspective(599px) rotateY(-23deg) rotateX(-16deg) rotateZ(-4deg);    
-        }
+        left: 49%;
+        top: 169px;
+        // img {
+        //     transform: perspective(599px) rotateY(-23deg) rotateX(-16deg) rotateZ(-4deg);    
+        // }
     }
     .panel-5 {
-        left: 47%;
-        top: 125px;
+        left: 57%;
+        top: 65px;
         img {
-            transform: perspective(599px) rotateY(-23deg) rotateX(-16deg) rotateZ(-3deg);    
+            transform: perspective(599px) rotateY(-23deg) rotateX(-16deg) rotate(-9deg);    
         }        
+    }
+    .panel-6 {
+        left: 61%;
+        top: 50px;
+        img {
+            transform: perspective(599px) rotateY(-23deg) rotateX(-16deg) rotate(-9deg);    
+        }        
+    }
+    .panel-100,
+    .panel-101,
+    .panel-102,
+    .panel-103,
+    .panel-104 {
+        left: 39%;
+        top: 104px;  
+        margin-left: -4px;     
+    }
+    .central-screens-content{
+        left: 15.4%;
+        top: 69px;
+        margin-left: 0;
+        width: 300px;
+        display: inline-block;
+        height: 54px;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: -.5px;
+        word-spacing: 2px;
     }
 }
 
@@ -47,4 +78,11 @@
         min-width: $panel-dimensions;
         height: $panel-dimensions;
     }
+    // .central-screens{
+    //     img {
+    //         width: $panel-dimensions;
+    //         min-width: $panel-dimensions;
+    //         height: $panel-dimensions;
+    //     }
+    // }
 }

@@ -1,6 +1,6 @@
 import * as jQuery from "jquery";
 import { GameplayAPI } from "./gameplay.api";
-import { Player, ScorecardPlayer, Scorecard, RunScored } from "../model/game.model";
+import { Player, ScorecardPlayer, Scorecard, RunScored, GamePanel } from "../model/game.model";
 import { GameConstant } from "../constant/game.constant";
 import { ScorecardAPI } from "./scorecard.api";
 import { ComputationEngine } from "../engine/computation.engine";
@@ -84,16 +84,38 @@ export class DisplayAPI {
     }
 
     gameOverShenanigans(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
+        let gamePanelData = new GamePanel();
+
         if(this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard)){
             jQuery("#gameResultsArea #graWinner").show();
             jQuery("#gameResultsArea #graLoser").hide();
+            
+            gamePanelData.isResultsMode = true;
+            gamePanelData.isWinner = true;
+            this.updateGamePanels(gamePanelData);
         } else {
             jQuery("#gameResultsArea #graWinner").hide();
             jQuery("#gameResultsArea #graLoser").show();
+            
+            gamePanelData.isResultsMode = true;
+            gamePanelData.isWinner = false;
+            this.updateGamePanels(gamePanelData);
         }
         jQuery("#gameResultsArea #playAgainBtn").show();
         jQuery("#gamePlayArea #flipPageBtn").hide();
-    }    
+    } 
+    
+    updateGamePanels(gamePanelData: GamePanel): void {
+        let scorePanelImage = this.gameplayAPI.getScorePanelImage(gamePanelData);
+        let extraScorePanelImage = gamePanelData.isDuckOut ? this.gameplayAPI.getScorePanelImage(gamePanelData): scorePanelImage;
+
+        jQuery("#gamePlayArea .gpaRunScored.panel-1, #gamePlayArea .gpaRunScored.panel-3, #gamePlayArea .gpaRunScored.panel-5")
+            .html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
+
+        if(gamePanelData.isDuckOut && !gamePanelData.isResultsMode) {
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${extraScorePanelImage}.gif" />`);        
+        }
+    }
 
     // UI updates using JQuery
     // -----------------------
@@ -140,15 +162,17 @@ export class DisplayAPI {
     }
 
     updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
-        let isDuckOut = playerScorecard.players[playerScorecard.wickets].runs === 0 
-                            && runScored.actual === 0;
-        let scorePanelImage = this.gameplayAPI.getScorePanelImage(runScored.actual, false);
-        let extraScorePanelImage = isDuckOut ? this.gameplayAPI.getScorePanelImage(runScored.actual, isDuckOut): scorePanelImage;
+        let gamePanelData = new GamePanel();
+        gamePanelData.runScored = runScored.actual;
+        let scorePanelImage = this.gameplayAPI.getScorePanelImage(gamePanelData);
+        gamePanelData.isDuckOut = playerScorecard.players[playerScorecard.wickets].runs === 0 
+                                    && runScored.actual === 0;
+        let extraScorePanelImage = gamePanelData.isDuckOut ? this.gameplayAPI.getScorePanelImage(gamePanelData): scorePanelImage;
 
         jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
         jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
 
-        if(isDuckOut) {
+        if(gamePanelData.isDuckOut) {
             jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${extraScorePanelImage}.gif" />`);        
         }
     }

@@ -64,3 +64,10 @@ export class RunScored {
     display: string = "";
     actual: number = 0;
 }
+
+export class GamePanel {
+    runScored: number = 0;
+    isDuckOut: boolean = false;
+    isResultsMode: boolean = false;
+    isWinner: boolean = false;
+}
