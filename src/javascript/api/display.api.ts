@@ -142,13 +142,14 @@ export class DisplayAPI {
     updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
         let isDuckOut = playerScorecard.players[playerScorecard.wickets].runs === 0 
                             && runScored.actual === 0;
-        let scorePanelImage = this.gameplayAPI.getScorePanelImage(runScored.actual, isDuckOut);
+        let scorePanelImage = this.gameplayAPI.getScorePanelImage(runScored.actual, false);
+        let extraScorePanelImage = isDuckOut ? this.gameplayAPI.getScorePanelImage(runScored.actual, isDuckOut): scorePanelImage;
 
         jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
         jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
 
         if(isDuckOut) {
-            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${extraScorePanelImage}.gif" />`);        
         }
     }
 
