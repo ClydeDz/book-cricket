@@ -1,32 +1,35 @@
+@import "../abstract/variables";
+
 #gamePlayArea {
     span {
         position: relative;
     }
     .panel-1 {
-        left: 9%;
+        left: 8%;
         top: 95px;
     }
     .panel-2 {
-        left: 19%;
+        left: 18%;
         top: 61px;
     }
     .panel-3 {
-        left: 31%;
+        left: 30%;
         top: 11px;
     }
     .panel-4 {
-        left: 47%;
+        left: 46%;
         top: 61px
     }
     .panel-5 {
-        left: 55%;
+        left: 54%;
         top: 95px;
     }
 }
 
 #gamePlayArea .gpaRunScored {
     img {
-        width: 100px;
-        min-width: 100px;
+        width: $panel-dimensions;
+        min-width: $panel-dimensions;
+        height: $panel-dimensions;
     }
 }
