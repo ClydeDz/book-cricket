@@ -87,12 +87,12 @@ export class DisplayAPI {
         let gamePanelData = new GamePanel();
 
         if(this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard)){
-            jQuery("#gamePlayArea .central-screens .central-screens-content").html("Congratulations!");            
+            this.updateCentralScreensContent("You won", "Congratulations!");
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = true;
             this.updateGamePanels(gamePanelData);
         } else {
-            jQuery("#gamePlayArea .central-screens .central-screens-content").html("Sorry, try again!");            
+            this.updateCentralScreensContent("You lost", "Sorry, try again!");
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = false;
             this.updateGamePanels(gamePanelData);
@@ -118,9 +118,7 @@ export class DisplayAPI {
 
     displayPreGameMessage(cpuScorecard: Scorecard): void {
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
-
-        jQuery("#preGameMessage #t").html(cpuScorecard.targetRuns.toString());
-        jQuery("#preGameMessage #o").html(totalOvers.toString());
+        this.updateCentralScreensContent(`You need to make`, `${cpuScorecard.targetRuns} runs in ${totalOvers} over`);
     }
 
     updateStatsHeader(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
@@ -165,13 +163,19 @@ export class DisplayAPI {
                                     && runScored.actual === 0;
         let extraScorePanelImage = gamePanelData.isDuckOut ? this.gameplayAPI.getScorePanelImage(gamePanelData): scorePanelImage;
 
-        jQuery("#gamePlayArea .central-screens .central-screens-content").html("page " + runScored.display);
+        this.updateCentralScreensContent("You flipped", "Page " + runScored.display);
         jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
         jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
 
         if(gamePanelData.isDuckOut) {
             jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${extraScorePanelImage}.gif" />`);        
         }
+    }
+
+    updateCentralScreensContent(firstLine: string, secondLine: string): void {
+        let contentHTML = `<div>${firstLine}</div>
+            <div>${secondLine}</div>`;
+        jQuery("#gamePlayArea .central-screens .central-screens-content").html(contentHTML);
     }
 
     updateScorecardFooter(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
@@ -263,7 +267,7 @@ export class DisplayAPI {
     // Initialize
 
     resetGameResultsArea(): void {
-        jQuery("#gamePlayArea .central-screens .central-screens-content").html("Let's play!"); 
+        this.updateCentralScreensContent("Ready?", "Let's play!");
         jQuery("#gameResultsArea #playAgainBtn").hide();
     }
 

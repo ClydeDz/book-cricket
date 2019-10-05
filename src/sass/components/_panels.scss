@@ -56,9 +56,9 @@
         top: 104px;  
         margin-left: -4px;     
     }
-    .central-screens-content{
+    .central-screens-content {
         left: 15.4%;
-        top: 69px;
+        top: 89px;
         margin-left: 0;
         width: 300px;
         display: inline-block;
@@ -69,6 +69,10 @@
         font-weight: 800;
         letter-spacing: -.5px;
         word-spacing: 2px;
+
+        & > div:first-child {
+            font-size: small;
+        }
     }
 }
 
