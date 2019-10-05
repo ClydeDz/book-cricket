@@ -95,13 +95,15 @@ export class DisplayAPI {
             this.updateCentralScreensContent("You won", "Congratulations!");
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = true;
-            this.updateGamePanels(gamePanelData);
         } else {
             this.updateCentralScreensContent("You lost", "Sorry, try again!");
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = false;
-            this.updateGamePanels(gamePanelData);
         }
+        let thisClassInstance = this;
+        setTimeout(function(){
+            thisClassInstance.updateGamePanels(gamePanelData);
+        }, this.gameConstant.gameResultsTimer);
         jQuery("#gameResultsArea #playAgainBtn").show();
         jQuery("#gamePlayArea #flipPageBtn").hide();
     } 
