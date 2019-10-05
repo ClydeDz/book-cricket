@@ -19,7 +19,7 @@ $(document).ready(function():void {
         displayAPI.startGame();
     });
 
-    $("#scorecardBtn").click(function():void {
+    $("#scorecardBtn, #closeScorecardBtn").click(function():void {
         displayAPI.toggleScorecard();
     });
 

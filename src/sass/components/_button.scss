@@ -27,3 +27,29 @@
         border-radius: $component-border-radius;
     }
 }
+
+.inverse-action-button {
+    background-color: darken($white, 1);
+    padding: 3px 1px 3px 9px;
+    border: none;
+    color: $bright-accent;
+    font-size: large;
+    font-weight: 800;
+    outline: none;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    &:hover, &:focus {
+        background-color: $white;
+    }
+
+    span {
+        @include comet-gradient-effect(darken($white, 1), darken($white, 3));    
+        padding: 12px 12px;    
+    }
+
+    &, & span{
+        border-radius: $component-border-radius;
+    }
+}

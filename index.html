@@ -10,6 +10,7 @@
                 <p>Apologies, but this app only works well on large screen devices.</p>
             </div>
         </div>
+        <div class="scorecard-background scorecard-footer-component"></div>
         <div id="consoleGame">
             <img src="./src/images/icons/app-icon.png" class="app-icon" />
             <h1 style="display:none">Book Cricket</h1>
@@ -47,12 +48,15 @@
                     <span>Play again</span>
                 </button>
             </div>
-            <div id="scorecardFooter" data-prefix="scorecard">
+            <div id="scorecardFooter" class="scorecard-footer-component" data-prefix="scorecard">
                 <div id="scorecardPlayer"></div>
                 <div id="scorecardCPU"></div>
                 <div class="scorecard-slider">
                     <button id="togglePlayerCPUScorecardBtn" class="action-button view-cpu-scorecard">
                         <span>View CPU Scorecard</span>
+                    </button>
+                    <button id="closeScorecardBtn" class="inverse-action-button">
+                        <span>Close</span>
                     </button>
                 </div>
             </div>

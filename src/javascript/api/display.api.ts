@@ -69,11 +69,11 @@ export class DisplayAPI {
     }
     
     initializeScorecard(): void {
-        jQuery("#scorecardFooter").hide();
+        jQuery(".scorecard-footer-component").hide();
     }
 
     toggleScorecard(): void {
-        jQuery("#scorecardFooter").toggle();
+        jQuery(".scorecard-footer-component").toggle();
     }
 
     initializePlayerCPUScorecard(): void {

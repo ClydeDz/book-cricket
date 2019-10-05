@@ -1,10 +1,17 @@
 @import "../abstract/colors";
 @import "../abstract/mixins";
+@import "../abstract/images";
 
 #scorecardBtn {
     position: fixed;
     top: 3%;
     right: 3%;
+}
+
+#scorecardFooter {
+    position: relative;
+    top: -177px;
+    z-index: 999;
 }
 
 #scorecardFooter .scorecard-table {
@@ -128,9 +135,25 @@
     float: right;
 }
 
+.scorecard-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url($background-image) no-repeat center; 
+    background-size: cover;
+    opacity: 0.8;
+    filter: blur(10px);
+    z-index: 998;
+}
+
 
 // Scorecard slider 
-.scorecard-slider {
+#scorecardFooter .scorecard-slider {
     margin: auto;
-    width: 25%;
+    width: 35%;
+    button {
+        margin-right: 4px;
+    }
 }
