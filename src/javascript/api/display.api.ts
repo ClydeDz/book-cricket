@@ -22,7 +22,7 @@ export class DisplayAPI {
         this.playerScorecard = this.scorecardAPI.initPlayerScorecard(allPlayers, this.cpuScorecard);
 
         this.initializePlayerCPUScorecard();
-        this.toggleScorecard();
+        this.initializeScorecard();
         this.resetGameResultsArea();
         this.resetGamePlayArea();
         this.displayPreGameMessage(this.cpuScorecard);
@@ -66,6 +66,10 @@ export class DisplayAPI {
                 return false;
             }
         });
+    }
+    
+    initializeScorecard(): void {
+        jQuery("#scorecardFooter").hide();
     }
 
     toggleScorecard(): void {
