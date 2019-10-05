@@ -102,13 +102,13 @@ export class DisplayAPI {
     } 
     
     updateGamePanels(gamePanelData: GamePanel): void {
-        let scorePanelImage = this.gameplayAPI.getScorePanelImage(gamePanelData);
+        let gamePanelDataWithoutDuckOut = Object.assign({}, gamePanelData);
+        gamePanelDataWithoutDuckOut.isDuckOut = false; // So that we don't get duck out image twice
+        let scorePanelImage = this.gameplayAPI.getScorePanelImage(gamePanelDataWithoutDuckOut);
         let extraScorePanelImage = gamePanelData.isDuckOut ? this.gameplayAPI.getScorePanelImage(gamePanelData): scorePanelImage;
 
-        jQuery("#gamePlayArea .gpaRunScored.panel-1, #gamePlayArea .gpaRunScored.panel-3, #gamePlayArea .gpaRunScored.panel-5")
-            .html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
-
-        if(gamePanelData.isDuckOut && !gamePanelData.isResultsMode) {
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);
+        if(gamePanelData.isDuckOut) {
             jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${extraScorePanelImage}.gif" />`);        
         }
     }
@@ -158,18 +158,11 @@ export class DisplayAPI {
     updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
         let gamePanelData = new GamePanel();
         gamePanelData.runScored = runScored.actual;
-        let scorePanelImage = this.gameplayAPI.getScorePanelImage(gamePanelData);
         gamePanelData.isDuckOut = playerScorecard.players[playerScorecard.wickets].runs === 0 
                                     && runScored.actual === 0;
-        let extraScorePanelImage = gamePanelData.isDuckOut ? this.gameplayAPI.getScorePanelImage(gamePanelData): scorePanelImage;
 
         this.updateCentralScreensContent("You flipped", "Page " + runScored.display);
-        jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
-        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
-
-        if(gamePanelData.isDuckOut) {
-            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${extraScorePanelImage}.gif" />`);        
-        }
+        this.updateGamePanels(gamePanelData);
     }
 
     updateCentralScreensContent(firstLine: string, secondLine: string): void {
