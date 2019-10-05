@@ -6,23 +6,38 @@
     }
     .panel-1 {
         left: 8%;
-        top: 95px;
+        top: 115px;
+        img {
+            transform: perspective(599px) rotateY(29deg) rotateX(-20deg) rotateZ(5deg);
+        }
     }
     .panel-2 {
-        left: 18%;
-        top: 61px;
+        left: 12%;
+        top: 122px;
+        img {
+            transform: perspective(599px) rotateY(28deg) rotateX(-20deg) rotateZ(4deg);    
+        }        
     }
     .panel-3 {
         left: 30%;
-        top: 11px;
+        top: 42px;
+        img {
+            transform: perspective(599px) rotateY(-1deg) rotateX(-13deg) rotateZ(0deg);    
+        }        
     }
     .panel-4 {
-        left: 46%;
-        top: 61px
+        left: 42%;
+        top: 126px;
+        img {
+            transform: perspective(599px) rotateY(-23deg) rotateX(-16deg) rotateZ(-4deg);    
+        }
     }
     .panel-5 {
-        left: 54%;
-        top: 95px;
+        left: 47%;
+        top: 125px;
+        img {
+            transform: perspective(599px) rotateY(-23deg) rotateX(-16deg) rotateZ(-3deg);    
+        }        
     }
 }
 
