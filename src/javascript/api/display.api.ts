@@ -87,16 +87,12 @@ export class DisplayAPI {
         let gamePanelData = new GamePanel();
 
         if(this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard)){
-            jQuery("#gameResultsArea #graWinner").show();
-            jQuery("#gameResultsArea #graLoser").hide();
-            
+            jQuery("#gamePlayArea .central-screens .central-screens-content").html("Congratulations!");            
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = true;
             this.updateGamePanels(gamePanelData);
         } else {
-            jQuery("#gameResultsArea #graWinner").hide();
-            jQuery("#gameResultsArea #graLoser").show();
-            
+            jQuery("#gamePlayArea .central-screens .central-screens-content").html("Sorry, try again!");            
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = false;
             this.updateGamePanels(gamePanelData);
@@ -169,6 +165,7 @@ export class DisplayAPI {
                                     && runScored.actual === 0;
         let extraScorePanelImage = gamePanelData.isDuckOut ? this.gameplayAPI.getScorePanelImage(gamePanelData): scorePanelImage;
 
+        jQuery("#gamePlayArea .central-screens .central-screens-content").html("page " + runScored.display);
         jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
         jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
 
@@ -266,8 +263,7 @@ export class DisplayAPI {
     // Initialize
 
     resetGameResultsArea(): void {
-        jQuery("#gameResultsArea #graWinner").hide();
-        jQuery("#gameResultsArea #graLoser").hide();
+        jQuery("#gamePlayArea .central-screens .central-screens-content").html("Let's play!"); 
         jQuery("#gameResultsArea #playAgainBtn").hide();
     }
 
