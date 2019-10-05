@@ -52,9 +52,14 @@ export class DisplayAPI {
     }
 
     infiniteRoll(rollonElements: string): void {
+        let gameplayEngine = this.gameplayEngine;
         $(rollonElements).each(function() {
             let thisElement = $(this);
             if(thisElement.hasClass("active")) {
+                if(thisElement.hasClass("ad-roll")) {
+                    let imageIdentifier = gameplayEngine.getRandomNumberWithinRange(1,4);
+                    thisElement.children().first().attr("src", `./src/images/assets/ads/ad-${imageIdentifier}.jpg`);
+                }
                 let nextElement = thisElement.next().length > 0 ? thisElement.next() : $(rollonElements).first();
                 thisElement.removeClass("active");                
                 nextElement.addClass("active");
