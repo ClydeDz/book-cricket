@@ -145,10 +145,10 @@ export class DisplayAPI {
         let scorePanelImage = this.gameplayAPI.getScorePanelImage(runScored.actual, isDuckOut);
 
         jQuery("#gamePlayArea #gpaPageFlipped").html("page" + runScored.display);
-        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/${scorePanelImage}.gif" />`);        
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
 
         if(isDuckOut) {
-            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/${scorePanelImage}.gif" />`);        
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);        
         }
     }
 
@@ -248,7 +248,7 @@ export class DisplayAPI {
 
     resetGamePlayArea(): void {
         jQuery("#gamePlayArea #gpaPageFlipped").html("0");
-        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/static.gif" />`);           
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/static.gif" />`);           
         jQuery("#gamePlayArea #flipPageBtn").show();
     }
 }
