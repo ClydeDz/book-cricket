@@ -130,7 +130,9 @@ export class DisplayAPI {
 
     displayPreGameMessage(cpuScorecard: Scorecard): void {
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
-        this.updateCentralScreensContent(`You need to make`, `${cpuScorecard.targetRuns} runs in ${totalOvers} over`);
+        let runsDisplayText = cpuScorecard.targetRuns === 1 ? "run" : "runs";
+        let overDisplayText = totalOvers === 1 ? "over" : "overs";
+        this.updateCentralScreensContent(`You need to make`, `${cpuScorecard.targetRuns} ${runsDisplayText} in ${totalOvers} ${overDisplayText}`);
     }
 
     updateStatsHeader(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
