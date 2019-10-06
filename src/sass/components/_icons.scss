@@ -22,4 +22,25 @@
     position: fixed;
     top: 3%;
     left: 1%;
+    z-index: 2;
+}
+
+.app-icon-stripe {
+    border-radius: 50px;
+    position: fixed;
+    top: 3%;
+    left: 0;
+    z-index: 0;
+
+    span {
+        @include comet-gradient-effect($dark-accent, $bright-accent);    
+        padding: 18px 24px;
+        width: 48px;
+        display: inline-block; 
+        opacity: 0.7;
+    }
+
+    &, & span{
+        border-radius: $component-border-radius;
+    }    
 }
