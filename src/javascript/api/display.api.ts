@@ -74,6 +74,7 @@ export class DisplayAPI {
 
     toggleScorecard(): void {
         jQuery(".scorecard-footer-component").toggle();
+        jQuery("#scorecardFooter").addClass("zoomIn animated");
     }
 
     initializePlayerCPUScorecard(): void {

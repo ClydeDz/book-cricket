@@ -19,8 +19,16 @@ $(document).ready(function():void {
         displayAPI.startGame();
     });
 
-    $("#scorecardBtn, #closeScorecardBtn").click(function():void {
-        displayAPI.toggleScorecard();
+    $("#scorecardBtn").click(function():void {
+        displayAPI.toggleScorecard();jQuery("#scorecardFooter").addClass("zoomIn animated");
+    });
+
+    $("#closeScorecardBtn").click(function():void {
+        $("#scorecardFooter").addClass("zoomOut animated");
+        setTimeout(function() {
+            displayAPI.toggleScorecard();
+            $("#scorecardFooter").removeClass("zoomOut");
+        }, 500);        
     });
 
     $("#togglePlayerCPUScorecardBtn").click(function():void {
