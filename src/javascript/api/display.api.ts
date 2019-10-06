@@ -158,12 +158,12 @@ export class DisplayAPI {
         jQuery("#statsHeader #statsBatsman").html(batsman.name);
         jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
         jQuery("#statsHeader #statsBatsmanStarPlayer").html(batsman.starBatsman ? "*": "");
-        jQuery("#statsHeader #statsBatsmanRunsMade").html(batsman.runs.toString());
+        jQuery("#statsHeader #statsBatsmanRunsMade").html(`<span class='flash animated'>${batsman.runs}</span>`);
         jQuery("#statsHeader #statsBatsmanBallsPlayed").html(`(${batsman.balls})`);
         jQuery("#statsHeader #statsBowler").html(bowler.name);
         jQuery("#statsHeader #statsBowlerStyle").html(bowler.bowlingStyle);
         jQuery("#statsHeader #statsBowlerStarPlayer").html(bowler.starBowler ? "*": "");
-        jQuery("#statsHeader #statsBowlerRunsGiven").html(bowler.runsGiven.toString());
+        jQuery("#statsHeader #statsBowlerRunsGiven").html(`<span class='flash animated'>${bowler.runsGiven}</span>`);
         jQuery("#statsHeader #statsBowlerBallsBowled").html(`(${bowler.ballsBowled})`);
     }
 
@@ -178,8 +178,8 @@ export class DisplayAPI {
     }
 
     updateCentralScreensContent(firstLine: string, secondLine: string): void {
-        let contentHTML = `<div>${firstLine}</div>
-            <div>${secondLine}</div>`;
+        let contentHTML = `<div class='flipInX animated'>${firstLine}</div>
+            <div class='flipInX animated'>${secondLine}</div>`;
         jQuery("#gamePlayArea .central-screens .central-screens-content").html(contentHTML);
     }
 
