@@ -1,0 +1,46 @@
+.bat-icon, .ball-icon {
+    position: fixed;
+    opacity: 0.09;
+}
+
+.bat-icon {
+    width: 9px;
+    bottom: 5.2%;
+    left: 18.5%;    
+    transform: rotate(20deg);
+}
+
+.ball-icon {
+    width: 38px;
+    bottom: 6%;
+    right: -21px;
+    transform: rotate(79deg);
+}
+
+.app-icon {
+    width: 80px;
+    position: fixed;
+    top: 3%;
+    left: 1%;
+    z-index: 2;
+}
+
+.app-icon-stripe {
+    border-radius: 50px;
+    position: fixed;
+    top: 3%;
+    left: 0;
+    z-index: 0;
+
+    span {
+        @include comet-gradient-effect($dark-accent, $bright-accent);    
+        padding: 18px 24px;
+        width: 48px;
+        display: inline-block; 
+        opacity: 0.7;
+    }
+
+    &, & span{
+        border-radius: $component-border-radius;
+    }    
+}

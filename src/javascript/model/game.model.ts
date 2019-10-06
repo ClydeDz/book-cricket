@@ -50,10 +50,11 @@ export class ScorecardPlayer extends Player {
 export class Scorecard {
     players: Array<ScorecardPlayer> = [];
     runs: number = 0;
+    targetRuns: number = 0;
     balls: number = 0;
     wickets: number = 0;
     overs: number = 0;
-    overHistory: number[] = [0,0,0,0,0,0];
+    overHistory: string[] = ["","", "", "", "", ""];
     currentRunRate: number = 0;
     projectedScore: number = 0;
     requiredRunRate: number = 0;
@@ -62,4 +63,11 @@ export class Scorecard {
 export class RunScored {
     display: string = "";
     actual: number = 0;
+}
+
+export class GamePanel {
+    runScored: number = 0;
+    isDuckOut: boolean = false;
+    isResultsMode: boolean = false;
+    isWinner: boolean = false;
 }

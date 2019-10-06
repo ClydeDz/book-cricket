@@ -33,7 +33,7 @@ export class GameplayEngine {
         return this.getRandomNumberWithinRange(bookStart, bookEnd);
     }
 
-    private getRandomNumberWithinRange(min: number, max: number): number {
+    getRandomNumberWithinRange(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }

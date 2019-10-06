@@ -14,6 +14,7 @@ export class ScorecardAPI {
         let cpuScorecard: Scorecard = new Scorecard();
         cpuScorecard.players = players;
         cpuScorecard.runs = this.gameplayAPI.getTargetScore();
+        cpuScorecard.targetRuns = this.computationEngine.targetRuns(cpuScorecard.runs);
         cpuScorecard.balls = this.gameConstant.totalBalls;
         cpuScorecard.overs = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
         cpuScorecard.currentRunRate = this.computationEngine.runRate(cpuScorecard.runs, cpuScorecard.overs);
@@ -21,20 +22,17 @@ export class ScorecardAPI {
     }
 
     initPlayerScorecard(players: Array<ScorecardPlayer>, cpuScorecard: Scorecard): Scorecard {
-        let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
 
         let playerScorecard: Scorecard = new Scorecard();
         playerScorecard.players = players;
-        playerScorecard.requiredRunRate = this.computationEngine.requiredRunRate(0,0,targetRuns,totalOvers);
+        playerScorecard.requiredRunRate = this.computationEngine.requiredRunRate(0,0,cpuScorecard.targetRuns,totalOvers);
 
         return playerScorecard;
     }
     
     updatePlayerScorecard(playerScorecard: Scorecard, cpuScorecard: Scorecard, runScored: number): Scorecard {
-        let targetRuns: number = this.computationEngine.targetRuns(cpuScorecard.runs);
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
-        
         let hasWicketFallen: boolean = runScored === 0;
 
         playerScorecard.players =  this.updatePlayerScorecardPlayers(playerScorecard.players, runScored,
@@ -47,7 +45,7 @@ export class ScorecardAPI {
             playerScorecard.overHistory, playerScorecard.overs, runScored);
         playerScorecard.currentRunRate = this.computationEngine.runRate(playerScorecard.runs, playerScorecard.overs);
         playerScorecard.requiredRunRate = this.computationEngine.requiredRunRate(
-            playerScorecard.runs,playerScorecard.overs,targetRuns,totalOvers);
+            playerScorecard.runs,playerScorecard.overs, cpuScorecard.targetRuns,totalOvers);
         playerScorecard.projectedScore = this.computationEngine.projectedScore(
             playerScorecard.runs, playerScorecard.overs, playerScorecard.currentRunRate, totalOvers
         );
@@ -72,11 +70,12 @@ export class ScorecardAPI {
         return players;
     }
 
-    updatePlayerScorecardOverHistory(overHistory: number[], oversPlayed: number, runsScored: number): number[] {
+    updatePlayerScorecardOverHistory(overHistory: string[], oversPlayed: number, runsScored: number): string[] {
         let currentBall: number = this.gameplayEngine.getCurrentBall(oversPlayed);
         let ball = currentBall === 0 ? 5 : currentBall-1; // TODO: Move this to the engine and add comments
-        overHistory = currentBall === 1 ? [0,0,0,0,0,0]: overHistory;        
-        overHistory[ball] = runsScored;
+        let runScoredDisplay = runsScored === 0 ? this.gameConstant.statsWicketNotation : runsScored.toString();
+        overHistory = currentBall === 1 ? ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"]: overHistory;        
+        overHistory[ball] = runScoredDisplay;
         return overHistory;
     }
 
@@ -88,7 +87,7 @@ export class ScorecardAPI {
 
         currentBowler.runsGiven = hasWicketFallen ? currentBowler.runsGiven : currentBowler.runsGiven + runScored;
         currentBowler.wickets = hasWicketFallen ? ++currentBowler.wickets: currentBowler.wickets;
-        currentBowler.balls = ++currentBowler.balls;
+        currentBowler.ballsBowled = ++currentBowler.balls;
         currentBowler.economy = this.computationEngine.bowlingEconomy(currentBowler.balls, currentBowler.runsGiven);
 
         cpuScorecard.players[currentOverFloored] = currentBowler;

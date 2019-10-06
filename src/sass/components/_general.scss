@@ -1,8 +1,14 @@
-@import "./abstract/variables";
+@import "../abstract/variables";
+@import "../abstract/images";
+@import "../abstract/fonts";
+@import "../abstract/colors";
 
 body {
     background-color: $one; 
-    color: black;
+    color: $black;
     font-size: 20px;
-    transition: all ease 0.5s
+    font-family: $body-font;
+    transition: all ease 0.5s;
+    background: url($background-image) no-repeat center; 
+    background-size: cover;
 }

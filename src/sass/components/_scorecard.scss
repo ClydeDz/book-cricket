@@ -1,0 +1,159 @@
+@import "../abstract/colors";
+@import "../abstract/mixins";
+@import "../abstract/images";
+
+#scorecardBtn {
+    position: fixed;
+    top: 3%;
+    right: 3%;
+}
+
+#scorecardFooter {
+    position: relative;
+    top: -177px;
+    z-index: 999;
+}
+
+#scorecardFooter .scorecard-table {
+    width: 50%;
+    margin: auto;
+    text-transform: uppercase;
+
+    .scorecard-table-body, .scorecard-table-header, .scorecard-table-footer {
+        float: left;
+        padding: 10px; 
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    }   
+    .scorecard-table-column-1 {
+        width: 60%;
+        display: inline-block;
+    }
+    .scorecard-table-column-2, .scorecard-table-column-3,
+    .scorecard-table-column-4, .scorecard-table-column-5 {
+        width: 12%;
+        display: inline-block;
+    }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    } 
+}
+
+#scorecardFooter .scorecard-table {
+    .scorecard-table-title, .scorecard-table-header, .scorecard-table-footer {
+        background-color: $dark-accent;
+        padding: 0;
+        border-radius: 50px;
+        color: $white;
+        font-size: larger;
+        font-weight: bold;
+
+        & > span {
+            @include comet-gradient-effect($dark-accent, $bright-accent);  
+            display: block;    
+            width: 100%;
+            padding: 8px 0;
+            border-radius: 50px;
+        }
+
+        .pull-right, .pull-left {
+            margin: 0 22px;
+        }
+    }
+
+    .scorecard-table-title {
+        & > span {
+            padding: 15px 0px 32px 0;
+            vertical-align: top;
+            margin-bottom: -14px;
+        }
+    }
+
+    .scorecard-table-header {
+        width: 80%;
+        margin-left: 63px;
+        font-size: small;
+        margin-top: -19px;
+        margin-bottom: 0;
+        
+        .scorecard-table-column-1 {
+            width: 59%;
+        }
+        .scorecard-table-column-2, .scorecard-table-column-3 {
+            width: 12.2%;
+            margin-left: 7px;
+        }
+        .scorecard-table-column-4 {
+            margin-left: 15px;
+            width: auto;
+        }
+    }
+}
+
+#scorecardFooter .scorecard-table {
+    .scorecard-table-body {
+        background-color: $white;
+        padding: 10px 19px;
+        border-radius: 20px;
+        width: 93%;
+        color: $black;
+        font-size: large;
+        font-weight: 700;
+
+        .scorecard-table-column-1 {
+            color: $bright-accent;
+            font-weight: 800;        
+            letter-spacing: -.5px;
+            word-spacing: 2px;
+            line-height: 1.5;
+        }
+    }
+}
+
+#scorecardFooter .scorecard-table.scorecard-table-extra-column {
+    .scorecard-table-header {
+        .scorecard-table-column-1 {
+            width: 33%;
+        } 
+        .scorecard-table-column-2, .scorecard-table-column-3 {
+            width: 16.5%;
+        }
+        .scorecard-table-column-4 {
+            margin-left: -10px;
+        }       
+        .scorecard-table-column-5 {
+            margin-left: 22px;
+        }       
+    }
+    .scorecard-table-column-1 {
+        width: 41%;        
+    }
+}
+.pull-right {
+    float: right;
+}
+
+.scorecard-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url($background-image) no-repeat center; 
+    background-size: cover;
+    opacity: 0.8;
+    filter: blur(10px);
+    z-index: 998;
+}
+
+
+// Scorecard slider 
+#scorecardFooter .scorecard-slider {
+    margin: auto;
+    width: 35%;
+    button {
+        margin-right: 4px;
+    }
+}

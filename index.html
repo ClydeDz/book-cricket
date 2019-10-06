@@ -1,63 +1,133 @@
 <html>
     <head>
+        <title>Book Cricket</title>
         <link rel="shortcut icon" href="./favicon.ico">
         <link rel="stylesheet" href="./dist/bundle.css" />
     </head>
     <body>
-        <div id="consoleGame">
-            <p>Book Cricket</p>
-        </div>
-        <div id="preGameMessage" data-prefix="pgm">
-            <p>You need to make <span id="t"></span> runs in <span id="o"></span> overs.</p>
-        </div>
-        <div id="game">
-            <div id="statsHeader" data-prefix="stats">
-                <div>
-                    You <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span> 
-                    CPU (<span id="statsCPURuns"></span>)
-                </div>
-                <div>
-                    Overs <span id="statsOvers"></span>
-                    [<span id="statsBall1"></span>|<span id="statsBall2"></span>|<span id="statsBall3"></span>|
-                    <span id="statsBall4"></span>|<span id="statsBall5"></span>|<span id="statsBall6"></span>]
-                </div>
-                <hr/>
-                <div class="stats-slider">
-                    <div class="active">Current run rate: <span id="statsCurrentRunRate"></span></div>
-                    <div>Required run rate: <span id="statsRequiredRunRate"></span></div>
-                    <div>Projected score: <span id="statsProjectedScore"></span></div>
-                    <div>Need <span id="statsRunsRemaining"></span> more to win in <span id="statsBallsRemaining"></span></div>
-                </div>
-                <div>
-                    Batsman: <span id="statsBatsman"></span> | <span id="statsBatsmanStyle"></span> | <span id="statsBatsmanStarPlayer"></span> 
-                    Bowler: <span id="statsBowler"></span> | <span id="statsBowlerStyle"></span> | <span id="statsBowlerStarPlayer"></span> 
-                </div>
-                <hr/>
+        <div id="unsupportedDevices">
+            <div>
+                <p>Apologies, but this app only works well on large screen devices.</p>
             </div>
+        </div>
+        <div class="scorecard-background scorecard-footer-component"></div>
+        <div id="consoleGame">
+            <img src="./src/images/icons/app-icon.png" class="app-icon" />
+            <span class="app-icon-stripe"><span></span></span> 
+            <h1 style="display:none">Book Cricket</h1>
+        </div>
+        <div>
+            <button id="scorecardBtn" class="action-button slideInLeft animated">
+                <span>Scorecard</span>
+            </button>
+        </div>
+
+        <div id="game">
             <div id="gamePlayArea" data-prefix="gpa">
                     <div>
-                        [<span class="gpaRunScored"></span>]
-                        [<span class="gpaRunScored gpaRunScoredExtra"></span>]
-                        [<span id="gpaPageFlipped"></span>]
-                        [<span class="gpaRunScored gpaRunScoredExtra"></span>]
-                        [<span class="gpaRunScored"></span>]
+                        <span class="gpaRunScored panel-1"></span>
+                        <span class="gpaRunScored panel-2"></span>
+                        <span class="gpaRunScored gpaRunScoredExtra panel-3"></span>
+                        <span class="gpaRunScored gpaRunScoredExtra panel-4"></span>
+                        <span class="gpaRunScored panel-5"></span>
+                        <span class="gpaRunScored panel-6"></span>
+                        <div class="central-screens">
+                            <span class="panel-100"><img src="./src/images/assets/panels/static-1.gif"/></span>
+                            <span class="panel-101"><img src="./src/images/assets/panels/static-1.gif"/></span>
+                            <span class="panel-102"><img src="./src/images/assets/panels/static-1.gif"/></span>
+                            <span class="panel-103"><img src="./src/images/assets/panels/static-1.gif"/></span>
+                            <span class="panel-104"><img src="./src/images/assets/panels/static-1.gif"/></span>
+                            <span class="central-screens-content"></span>
+                        </div>                        
                     </div>
-                    <button id="flipPageBtn">Flip page</button>
+                    <button id="flipPageBtn" class="action-button">
+                        <span>Flip page</span>
+                    </button>
             </div>    
             <div id="gameResultsArea" data-prefix="gra">
-                <div id="graWinner">
-                    <p>CONGRATULATIONS!!! You won</p>
-                </div>
-                <div id="graLoser">
-                    <p>Sorry, try again</p>
-                </div>
-                <button id="playAgainBtn">Play again</button>
+                <button id="playAgainBtn" class="action-button">
+                    <span>Play again</span>
+                </button>
             </div>
-            <div id="scorecardFooter" data-prefix="scorecard">
+            <div id="scorecardFooter" class="scorecard-footer-component" data-prefix="scorecard">
                 <div id="scorecardPlayer"></div>
                 <div id="scorecardCPU"></div>
+                <div class="scorecard-slider">
+                    <button id="togglePlayerCPUScorecardBtn" class="action-button view-cpu-scorecard">
+                        <span>View CPU Scorecard</span>
+                    </button>
+                    <button id="closeScorecardBtn" class="inverse-action-button">
+                        <span>Close</span>
+                    </button>
+                </div>
+            </div>
+            <div id="statsHeader" data-prefix="stats" class="row">
+                <div class="column column-1">
+                    <div>
+                        <span id="statsBatsmanStarPlayer" class="bright-display"></span><span id="statsBatsman" class="bright-display"></span> 
+                        <span id="statsBatsmanRunsMade" class="bright-display black-display"></span> <span id="statsBatsmanBallsPlayed" class="dark-display"></span>
+                        <br />
+                        <span id="statsBatsmanStyle" class="dark-display"></span>
+                    </div>
+                </div>
+                <div class="column column-4">
+                    <div class="stats-slider">
+                        <div class="active flipInX animated">
+                            <span class="bright-display">Current run rate <span id="statsCurrentRunRate" class="black-display"></span></span>
+                        </div>
+                        <div class="flipInX animated">
+                            <span class="bright-display">Target</span> <span id="statsTargetRuns" class="black-display"></span>
+                        </div>
+                        <div class="flipInX animated">
+                            <span class="bright-display">Required run rate <span id="statsRequiredRunRate" class="black-display"></span></span>
+                        </div>
+                        <div class="ad-roll flipInX animated">
+                            <img src="./src/images/assets/ads/ad-2.jpg"/>
+                        </div>
+                        <div class="flipInX animated">
+                            <span class="bright-display">Projected score <span id="statsProjectedScore" class="black-display"></span></span>
+                        </div>
+                        <div class="flipInX animated">
+                            <span class="bright-display">Need <span id="statsRunsRemaining" class="black-display"></span> more to win</span>
+                            <br />
+                            <span class="dark-display">in <span id="statsBallsRemaining"></span></span> 
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-2">
+                    <div class="big-score">
+                        <div>
+                            <span>You</span> <span id="statsPlayerRuns"></span>/<span id="statsPlayerWickets"></span>                         
+                            <div class="small-score">
+                                <span class="fade-text">Overs <span id="statsOvers"></span></span>
+                            </div>   
+                        </div>           
+                    </div>                                   
+                </div>
+                <div class="column column-5">
+                    <div>
+                        <span class="this-over bright-display">
+                            <span id="statsBall1" class="flash animated"></span><span id="statsBall2" class="flash animated"></span><span id="statsBall3" class="flash animated"></span><span id="statsBall4" class="flash animated"></span><span id="statsBall5" class="flash animated"></span><span id="statsBall6" class="flash animated"></span>
+                        </span>
+                        <br />
+                        <div class="dark-display">
+                            This over
+                        </div>                        
+                    </div>
+                </div>
+                <div class="column column-3">
+                    <div>
+                        <span id="statsBowlerStarPlayer" class="bright-display"></span><span id="statsBowler" class="bright-display"></span> 
+                        <span id="statsBowlerRunsGiven" class="bright-display black-display"></span> <span id="statsBowlerBallsBowled" class="dark-display"></span>
+                        <br />
+                        <span id="statsBowlerStyle" class="dark-display"></span> 
+                        <span class="ball-icon"></span>
+                    </div>
+                </div>
             </div>
         </div>
+        <img src="./src/images/icons/bat-icon.png"  class="bat-icon"/> 
+        <img src="./src/images/icons/ball-icon.png"  class="ball-icon"/> 
         <script src="./dist/bundle.js"></script>
     </body>
 </html>
