@@ -146,7 +146,8 @@ export class DisplayAPI {
 
         jQuery("#statsHeader #statsOvers").html(playerScorecard.overs.toString());
         for(let b=0; b<6; b++){
-            jQuery(`#statsHeader #statsBall${(b+1)}`).html(playerScorecard.overHistory[b]);
+            jQuery(`#statsHeader #statsBall${(b+1)}`)
+                .html(`<span class='flash animated'>${playerScorecard.overHistory[b]}</span>`);
         }
         jQuery("#statsHeader #statsCurrentRunRate").html(playerScorecard.currentRunRate.toString());
         jQuery("#statsHeader #statsRequiredRunRate").html(playerScorecard.requiredRunRate.toString());
