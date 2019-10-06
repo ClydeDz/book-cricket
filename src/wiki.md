@@ -14,7 +14,7 @@ GIFs
 Out https://gph.is/g/ZnMYdr1, https://gph.is/g/ZkPqmp4, http://gph.is/2uPtLbd, https://gph.is/g/E1GePB2, https://gph.is/g/Z88xNAZ
 Six https://gph.is/g/aXpzn8A, https://gph.is/g/EJl2kQx, http://gph.is/12M4Izc
 Duck out http://gph.is/2fqzZGu, http://gph.is/2j90dk8, https://gph.is/2v9Q4dV
-Victory http://gph.is/2oYdccD, https://gph.is/g/e4Vl1Da, https://gph.is/2yiolLJ, https://gph.is/2CYeEBt
+Victory http://gph.is/2aMPuvI, http://gph.is/2oYdccD, https://gph.is/g/e4Vl1Da, https://gph.is/2yiolLJ, https://gph.is/2CYeEBt
 Four https://gph.is/g/apyDozo, http://gph.is/2eI89KW, http://gph.is/12M4B6O
 Eight https://gph.is/g/ajmeopY, http://gph.is/2eHGUA2, http://gph.is/1bpPutg
 Two http://gph.is/2gDEBuH, http://gph.is/12M4tnK, https://gph.is/2tNL9yz
