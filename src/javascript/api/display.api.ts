@@ -136,10 +136,12 @@ export class DisplayAPI {
     }
 
     updateStatsHeader(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
+        let totalOvers = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
         let currentOver: number = this.gameplayEngine.getCurrentOver(playerScorecard.overs);
         let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
+        let currentBowler = currentOver === totalOvers ? currentOver - 1 : currentOver;
         let batsman: ScorecardPlayer = playerScorecard.players[currentBatsman];
-        let bowler: ScorecardPlayer = cpuScorecard.players[currentOver];
+        let bowler: ScorecardPlayer = cpuScorecard.players[currentBowler];
         let ballsRemaining = this.gameConstant.totalBalls - playerScorecard.balls;
         let runsRemaining = this.computationEngine.runsToWin(playerScorecard.runs, cpuScorecard.targetRuns);
 
