@@ -211,11 +211,13 @@ export class DisplayAPI {
         scorecardPlayerContent += `<div class='scorecard-table-body'>`;
         for(let i: number = 0; i < playerScorecard.players.length; i++){
             let player = playerScorecard.players[i];
-            let isOnStrike = i === currentBatsman ? "*" : "";
+            let isOnStrike = i === currentBatsman ? `<i>*</i>` : ``;
             let wicketTakenBy = player.wicketTakenBy != "" ? ` (b) ${player.wicketTakenBy}`: "";
+            let starPlayer = player.starBatsman ? `<span class='star-player'><img src='./src/images/icons/star.png' /></span>`
+                : `<span class='star-player'>&nbsp;</span>`;
 
             scorecardPlayerContent += `
-                <div class='scorecard-table-column-1'>${player.name}${isOnStrike}${wicketTakenBy}</div>
+                <div class='scorecard-table-column-1'>${starPlayer}${player.name}${isOnStrike}${wicketTakenBy}</div>
                 <div class='scorecard-table-column-2'>${player.runs}</div>
                 <div class='scorecard-table-column-3'>${player.balls}</div>
                 <div class='scorecard-table-column-4'>${player.strikeRate}</div>`;
@@ -252,10 +254,12 @@ export class DisplayAPI {
 
         for(let i: number = 0; i < cpuScorecard.players.length; i++){
             let player = cpuScorecard.players[i];
-            let isCurrentlyBowling = i === currentOver ? "*" : "";
+            let isCurrentlyBowling = i === currentOver ? `<i>*</i>` : ``;
+            let starPlayer = player.starBatsman ? `<span class='star-player'><img src='./src/images/icons/star.png' /></span>`
+                : `<span class='star-player'>&nbsp;</span>`;
 
             scorecardCPUContent += `
-                <div class='scorecard-table-column-1'>${player.name}${isCurrentlyBowling}</div>
+                <div class='scorecard-table-column-1'>${starPlayer}${player.name}${isCurrentlyBowling}</div>
                 <div class='scorecard-table-column-2'>${player.runsGiven}</div>
                 <div class='scorecard-table-column-3'>${player.ballsBowled}</div>
                 <div class='scorecard-table-column-4'>${player.wickets}</div>

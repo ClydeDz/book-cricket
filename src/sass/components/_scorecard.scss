@@ -108,6 +108,12 @@
             letter-spacing: -.5px;
             word-spacing: 2px;
             line-height: 1.5;
+
+            i {
+                font-style: normal;
+                margin-left: 2px;
+                font-weight: 600;
+            }
         }
     }
 }
@@ -155,5 +161,16 @@
     width: 35%;
     button {
         margin-right: 4px;
+    }
+}
+
+.star-player {
+    min-width: 13px;
+    margin-right: 4px;
+    display: inline-block;
+    img {
+        width: 13px;
+        position: relative;
+        top: 1px;
     }
 }
