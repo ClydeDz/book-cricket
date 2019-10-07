@@ -160,12 +160,12 @@ export class DisplayAPI {
         
         jQuery("#statsHeader #statsBatsman").html(batsman.name);
         jQuery("#statsHeader #statsBatsmanStyle").html(batsman.battingStyle);
-        jQuery("#statsHeader #statsBatsmanStarPlayer").html(batsman.starBatsman ? "*": "");
+        jQuery("#statsHeader #statsBatsmanIsStarPlayer").html(batsman.starBatsman ? `<img src="./src/images/icons/star.png"/>`: ``);
         jQuery("#statsHeader #statsBatsmanRunsMade").html(`<span class='flash animated'>${batsman.runs}</span>`);
         jQuery("#statsHeader #statsBatsmanBallsPlayed").html(`(${batsman.balls})`);
         jQuery("#statsHeader #statsBowler").html(bowler.name);
         jQuery("#statsHeader #statsBowlerStyle").html(bowler.bowlingStyle);
-        jQuery("#statsHeader #statsBowlerStarPlayer").html(bowler.starBowler ? "*": "");
+        jQuery("#statsHeader #statsBowlerIsStarPlayer").html(bowler.starBowler ? `<img src="./src/images/icons/star.png"/>`: ``);
         jQuery("#statsHeader #statsBowlerRunsGiven").html(`<span class='flash animated'>${bowler.runsGiven}</span>`);
         jQuery("#statsHeader #statsBowlerBallsBowled").html(`(${bowler.ballsBowled})`);
     }

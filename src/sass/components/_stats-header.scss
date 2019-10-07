@@ -133,3 +133,11 @@
     height: 35px;
     width: 100%;
 }
+
+#statsHeader #statsBatsmanIsStarPlayer,
+#statsHeader #statsBowlerIsStarPlayer {
+    img {
+        margin-right: 2px;
+        width: 11px;
+    }
+}
