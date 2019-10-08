@@ -156,7 +156,7 @@ export class DisplayAPI {
         jQuery("#statsHeader #statsTargetRuns").html(cpuScorecard.targetRuns.toString());
 
         jQuery("#statsHeader #statsOvers").html(playerScorecard.overs.toString());
-        for(let b=0; b<6; b++){
+        for(let b=0; b < this.gameConstant.TOTAL_BALLS_PER_OVER; b++){
             jQuery(`#statsHeader #statsBall${(b+1)}`)
                 .html(`<span class='flash animated'>${playerScorecard.overHistory[b]}</span>`);
         }
