@@ -19,14 +19,14 @@ export class GameplayAPI {
     }
 
     getTargetScore(): number {
-        return this.gameplayEngine.getTargetScore(this.gameConstant.possibleRuns, this.gameConstant.totalBalls);
+        return this.gameplayEngine.getTargetScore(this.gameConstant.POSSIBLE_RUNS, this.gameConstant.TOTAL_BALLS);
     }
 
     getRunScored(): RunScored {
-        let allowedRuns: number[] = this.gameConstant.possibleRuns;
+        let allowedRuns: number[] = this.gameConstant.POSSIBLE_RUNS;
         let runScored: number = allowedRuns[Math.floor(Math.random() * allowedRuns.length)];
         let bookPagePrefix: string = (this.gameplayEngine.getBookPageNumber(
-            this.gameConstant.bookStartingPageNumber, this.gameConstant.bookEndingPageNumber)).toString();
+            this.gameConstant.BOOK_STARTING_PAGE_NUMBER, this.gameConstant.BOOK_ENDING_PAGE_NUMBER)).toString();
 
         return { display: bookPagePrefix + runScored, actual: runScored };
     }
@@ -44,11 +44,11 @@ export class GameplayAPI {
     }
 
     allBallsPlayed(playerScorecard: Scorecard): boolean {
-        return playerScorecard.balls >= this.gameConstant.totalBalls;
+        return playerScorecard.balls >= this.gameConstant.TOTAL_BALLS;
     }
 
     allWicketsFallen(playerScorecard: Scorecard): boolean {
-        return playerScorecard.wickets >= this.gameConstant.teamSize;
+        return playerScorecard.wickets >= this.gameConstant.TEAM_SIZE;
     }
 
     getScorePanelImage(gamePanelData: GamePanel): string {

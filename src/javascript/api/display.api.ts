@@ -17,8 +17,8 @@ export class DisplayAPI {
 
     startGame(): void {
         let allPlayers: Array<ScorecardPlayer> = this.gameplayAPI.generateTeam(
-            this.gameConstant.teamSize * this.gameConstant.numberOfTeams);
-        this.cpuScorecard = this.scorecardAPI.initCPUScorecard(allPlayers.splice(0, this.gameConstant.teamSize));
+            this.gameConstant.TEAM_SIZE * this.gameConstant.NUMBER_OF_TEAMS);
+        this.cpuScorecard = this.scorecardAPI.initCPUScorecard(allPlayers.splice(0, this.gameConstant.TEAM_SIZE));
         this.playerScorecard = this.scorecardAPI.initPlayerScorecard(allPlayers, this.cpuScorecard);
 
         this.initializePlayerCPUScorecard();
@@ -97,7 +97,7 @@ export class DisplayAPI {
         let gamePanelData = new GamePanel();
 
         if(this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard)){
-            let wonByWickets = this.gameConstant.teamSize - playerScorecard.wickets;
+            let wonByWickets = this.gameConstant.TEAM_SIZE - playerScorecard.wickets;
             this.updateCentralScreensContent("You won", "Congratulations!", "You won by", `${wonByWickets} wickets`);
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = true;
@@ -110,7 +110,7 @@ export class DisplayAPI {
         let thisClassInstance = this;
         setTimeout(function(){
             thisClassInstance.updateGamePanels(gamePanelData);
-        }, this.gameConstant.gameResultsTimer);
+        }, this.gameConstant.GAME_RESULTS_TIMER);
         jQuery("#gameResultsArea #playAgainBtn").show();
         jQuery("#gamePlayArea #flipPageBtn").hide();
     } 
@@ -131,7 +131,7 @@ export class DisplayAPI {
     // -----------------------
 
     displayPreGameMessage(cpuScorecard: Scorecard): void {
-        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.TOTAL_BALLS);
         let runsDisplayText = cpuScorecard.targetRuns === 1 ? "run" : "runs";
         let overDisplayText = totalOvers === 1 ? "over" : "overs";
         this.updateCentralScreensContent(`You need to make`,
@@ -141,13 +141,13 @@ export class DisplayAPI {
     }
 
     updateStatsHeader(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
-        let totalOvers = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+        let totalOvers = this.computationEngine.ballsToOvers(this.gameConstant.TOTAL_BALLS);
         let currentOver: number = this.gameplayEngine.getCurrentOver(playerScorecard.overs);
-        let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
+        let currentBatsman = playerScorecard.wickets === this.gameConstant.TEAM_SIZE ? playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
         let currentBowler = currentOver === totalOvers ? currentOver - 1 : currentOver;
         let batsman: ScorecardPlayer = playerScorecard.players[currentBatsman];
         let bowler: ScorecardPlayer = cpuScorecard.players[currentBowler];
-        let ballsRemaining = this.gameConstant.totalBalls - playerScorecard.balls;
+        let ballsRemaining = this.gameConstant.TOTAL_BALLS - playerScorecard.balls;
         let runsRemaining = this.computationEngine.runsToWin(playerScorecard.runs, cpuScorecard.targetRuns);
 
         jQuery("#statsHeader #statsPlayerRuns").html(playerScorecard.runs.toString());
@@ -229,7 +229,7 @@ export class DisplayAPI {
 
     updatePlayerScorecard(playerScorecard: Scorecard): void {
         let scorecardPlayerContent: string = "<div class='scorecard-table'>";
-        let currentBatsman = playerScorecard.wickets === this.gameConstant.teamSize ? 
+        let currentBatsman = playerScorecard.wickets === this.gameConstant.TEAM_SIZE ? 
                                     playerScorecard.wickets-1 : playerScorecard.wickets; // TODO: Move this to test and add comments
         
         scorecardPlayerContent += `<div class='scorecard-table-title'><span>

@@ -9,11 +9,11 @@ $(document).ready(function():void {
     displayAPI.startGame();    
     var interval = self.setInterval(function() { 
         displayAPI.infiniteRoll("div.stats-slider>div"); 
-    }, gameConstant.statsRotationTimer);
+    }, gameConstant.STATS_ROTATION_TIMER);
     
     var centralScreensTimerInterval = self.setInterval(function() { 
         displayAPI.infiniteRoll("div.central-screens-slider>div"); 
-    }, gameConstant.centralScreenContentTimer);
+    }, gameConstant.CENTRAL_SCREEN_TIMER);
 
     $("#flipPageBtn").click(function():void {
         displayAPI.flipPage();

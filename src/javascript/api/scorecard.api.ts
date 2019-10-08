@@ -15,14 +15,14 @@ export class ScorecardAPI {
         cpuScorecard.players = players;
         cpuScorecard.runs = this.gameplayAPI.getTargetScore();
         cpuScorecard.targetRuns = this.computationEngine.targetRuns(cpuScorecard.runs);
-        cpuScorecard.balls = this.gameConstant.totalBalls;
-        cpuScorecard.overs = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+        cpuScorecard.balls = this.gameConstant.TOTAL_BALLS;
+        cpuScorecard.overs = this.computationEngine.ballsToOvers(this.gameConstant.TOTAL_BALLS);
         cpuScorecard.currentRunRate = this.computationEngine.runRate(cpuScorecard.runs, cpuScorecard.overs);
         return cpuScorecard;
     }
 
     initPlayerScorecard(players: Array<ScorecardPlayer>, cpuScorecard: Scorecard): Scorecard {
-        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.TOTAL_BALLS);
 
         let playerScorecard: Scorecard = new Scorecard();
         playerScorecard.players = players;
@@ -32,7 +32,7 @@ export class ScorecardAPI {
     }
     
     updatePlayerScorecard(playerScorecard: Scorecard, cpuScorecard: Scorecard, runScored: number): Scorecard {
-        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
+        let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.TOTAL_BALLS);
         let hasWicketFallen: boolean = runScored === 0;
 
         playerScorecard.players =  this.updatePlayerScorecardPlayers(playerScorecard.players, runScored,
@@ -73,7 +73,7 @@ export class ScorecardAPI {
     updatePlayerScorecardOverHistory(overHistory: string[], oversPlayed: number, runsScored: number): string[] {
         let currentBall: number = this.gameplayEngine.getCurrentBall(oversPlayed);
         let ball = currentBall === 0 ? 5 : currentBall-1; // TODO: Move this to the engine and add comments
-        let runScoredDisplay = runsScored === 0 ? this.gameConstant.statsWicketNotation : runsScored.toString();
+        let runScoredDisplay = runsScored === 0 ? this.gameConstant.STATS_WICKET_NOTATION : runsScored.toString();
         overHistory = currentBall === 1 ? ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"]: overHistory;        
         overHistory[ball] = runScoredDisplay;
         return overHistory;
