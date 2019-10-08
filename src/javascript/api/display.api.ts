@@ -122,9 +122,9 @@ export class DisplayAPI {
         let scorePanelImage = this.gameplayAPI.getScorePanelImage(gamePanelDataWithoutDuckOut);
         let extraScorePanelImage = gamePanelData.isDuckOut ? this.gameplayAPI.getScorePanelImage(gamePanelData): scorePanelImage;
 
-        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/${scorePanelImage}.gif" />`);
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="${this.gameConstant.PANELS_IMAGE_LOCATION}${scorePanelImage}${this.gameConstant.PANELS_IMAGE_EXTENSION}" />`);
         if(gamePanelData.isDuckOut) {
-            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="./src/images/assets/panels/${extraScorePanelImage}.gif" />`);        
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="${this.gameConstant.PANELS_IMAGE_LOCATION}${extraScorePanelImage}${this.gameConstant.PANELS_IMAGE_EXTENSION}" />`);        
         }
     }
 
@@ -322,7 +322,7 @@ export class DisplayAPI {
 
     resetGamePlayArea(): void {
         jQuery("#gamePlayArea #gpaPageFlipped").html("0");
-        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="./src/images/assets/panels/countdown.gif" />`);           
+        jQuery("#gamePlayArea .gpaRunScored").html(`<img src="${this.gameConstant.PANELS_IMAGE_LOCATION}countdown${this.gameConstant.PANELS_IMAGE_EXTENSION}" />`);           
         jQuery("#gamePlayArea #flipPageBtn").show();
     }
 }
