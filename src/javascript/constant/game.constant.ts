@@ -5,6 +5,8 @@ export class GameConstant {
     readonly TOTAL_BALLS: number = 30;
     readonly TOTAL_BALLS_PER_OVER: number = 6;
     readonly POSSIBLE_RUNS: number[] = [0, 2, 4, 6, 8];
+    readonly CENTURY_RUNS: number = 100;
+    readonly HALF_CENTURY_RUNS: number = 50;
     readonly BOOK_STARTING_PAGE_NUMBER: number = 0;
     readonly BOOK_ENDING_PAGE_NUMBER: number = 99; // This will be suffixed with a random number from possible runs
     readonly STATS_ROTATION_TIMER: number = 5000; // In milliseconds

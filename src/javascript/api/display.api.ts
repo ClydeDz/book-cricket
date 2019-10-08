@@ -184,8 +184,8 @@ export class DisplayAPI {
         gamePanelData.runScored = runScored.actual;
         gamePanelData.isDuckOut = player.runs === 0 && runScored.actual === 0;
         gamePanelData.isOut = runScored.actual === 0;
-        gamePanelData.isCentury = !(player.runs > 100) && (player.runs + runScored.actual >= 100) && (player.runs - runScored.actual < 100);
-        gamePanelData.isHalfCentury = !(player.runs > 50) && (player.runs + runScored.actual >= 50) && (player.runs - runScored.actual < 50);
+        gamePanelData.isCentury = !(player.runs > this.gameConstant.CENTURY_RUNS) && (player.runs + runScored.actual >= this.gameConstant.CENTURY_RUNS) && (player.runs - runScored.actual < this.gameConstant.CENTURY_RUNS);
+        gamePanelData.isHalfCentury = !(player.runs > this.gameConstant.HALF_CENTURY_RUNS) && (player.runs + runScored.actual >= this.gameConstant.HALF_CENTURY_RUNS) && (player.runs - runScored.actual < this.gameConstant.HALF_CENTURY_RUNS);
 
         let centralScreensSet2Content = this.updateGamePlayAreaHelper(gamePanelData);
         this.updateCentralScreensContent("You flipped", "Page " + runScored.display, centralScreensSet2Content[0], centralScreensSet2Content[1]);
