@@ -10,6 +10,10 @@ export class GameConstant {
     readonly CENTRAL_SCREEN_TIMER: number = 3500; // In milliseconds
     readonly STATS_WICKET_NOTATION: string = "W"; 
     
+    // SCORECARD
+    readonly VIEW_PLAYER_SCORECARD: string = "View Player Scorecard"; 
+    readonly VIEW_CPU_SCORECARD: string = "View CPU Scorecard"; 
+
     // ADVERTISEMENTS
     readonly ADS_IMAGE_LOCATION: string = "./src/images/assets/ads/ad-"; 
     readonly ADS_IMAGE_EXTENSION: string = ".jpg"; 

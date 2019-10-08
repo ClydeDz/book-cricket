@@ -85,7 +85,7 @@ export class DisplayAPI {
 
     togglePlayerCPUScorecard(): void {
         let isViewCPUScorecardBtn = jQuery("#scorecardFooter #togglePlayerCPUScorecardBtn").hasClass("view-cpu-scorecard");
-        let viewPlayerCPUScorecardBtnText = isViewCPUScorecardBtn ? "View Player Scorecard" : "View CPU Scorecard";
+        let viewPlayerCPUScorecardBtnText = isViewCPUScorecardBtn ? this.gameConstant.VIEW_PLAYER_SCORECARD : this.gameConstant.VIEW_CPU_SCORECARD;
         
         jQuery("#scorecardFooter #togglePlayerCPUScorecardBtn span").html(viewPlayerCPUScorecardBtnText);
         jQuery("#scorecardFooter #togglePlayerCPUScorecardBtn").toggleClass("view-cpu-scorecard");
