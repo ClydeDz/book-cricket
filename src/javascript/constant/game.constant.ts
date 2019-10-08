@@ -10,7 +10,9 @@ export class GameConstant {
     readonly CENTRAL_SCREEN_TIMER: number = 3500; // In milliseconds
     readonly STATS_WICKET_NOTATION: string = "W"; 
     
-    // IMAGES
+    // ADVERTISEMENTS
     readonly ADS_IMAGE_LOCATION: string = "./src/images/assets/ads/ad-"; 
     readonly ADS_IMAGE_EXTENSION: string = ".jpg"; 
+    readonly ADS_STARTING_IMAGE_ID: number = 1;
+    readonly ADS_ENDING_IMAGE_ID: number = 4;
 }

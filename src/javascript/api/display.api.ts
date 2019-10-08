@@ -58,7 +58,7 @@ export class DisplayAPI {
             let thisElement = $(this);
             if(thisElement.hasClass("active")) {
                 if(thisElement.hasClass("ad-roll")) {
-                    let imageIdentifier = gameplayEngine.getRandomNumberWithinRange(1,4);
+                    let imageIdentifier = gameplayEngine.getRandomNumberWithinRange(gameConstants.ADS_STARTING_IMAGE_ID, gameConstants.ADS_ENDING_IMAGE_ID);
                     thisElement.children().first().attr("src", `${gameConstants.ADS_IMAGE_LOCATION}${imageIdentifier}${gameConstants.ADS_IMAGE_EXTENSION}`);
                 }
                 let nextElement = thisElement.next().length > 0 ? thisElement.next() : $(rollonElements).first();
