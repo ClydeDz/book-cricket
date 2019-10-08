@@ -53,12 +53,13 @@ export class DisplayAPI {
 
     infiniteRoll(rollonElements: string): void {
         let gameplayEngine = this.gameplayEngine;
+        let gameConstants = this.gameConstant;
         $(rollonElements).each(function() {
             let thisElement = $(this);
             if(thisElement.hasClass("active")) {
                 if(thisElement.hasClass("ad-roll")) {
                     let imageIdentifier = gameplayEngine.getRandomNumberWithinRange(1,4);
-                    thisElement.children().first().attr("src", `./src/images/assets/ads/ad-${imageIdentifier}.jpg`);
+                    thisElement.children().first().attr("src", `${gameConstants.ADS_IMAGE_LOCATION}${imageIdentifier}${gameConstants.ADS_IMAGE_EXTENSION}`);
                 }
                 let nextElement = thisElement.next().length > 0 ? thisElement.next() : $(rollonElements).first();
                 thisElement.removeClass("active");                
