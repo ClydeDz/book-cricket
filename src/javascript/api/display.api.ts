@@ -292,7 +292,7 @@ export class DisplayAPI {
         for(let i: number = 0; i < cpuScorecard.players.length; i++){
             let player = cpuScorecard.players[i];
             let isCurrentlyBowling = i === currentOver ? `<i>*</i>` : ``;
-            let starPlayer = player.starBatsman ? `<span class='star-player'><img src='./src/images/icons/star.png' /></span>`
+            let starPlayer = player.starBowler ? `<span class='star-player'><img src='./src/images/icons/star.png' /></span>`
                 : `<span class='star-player'>&nbsp;</span>`;
 
             scorecardCPUContent += `
