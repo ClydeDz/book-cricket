@@ -51,23 +51,28 @@
         margin-left: -4px;     
     }
     .central-screens-content {
-        left: 10.4%;
-        top: 53px;
-        margin-left: 0;
-        width: 350px;
-        display: inline-block;
-        height: 54px;
-        text-align: center;
-        color: #fff;
-        text-transform: uppercase;
-        font-weight: 800;
-        letter-spacing: -.5px;
-        word-spacing: 2px;
-        font-size: larger;
+        .central-screens-slider {
+            text-align: center;
+            margin-top: 7px;
+            margin-left: 25px;
+            
+            div.active {
+                width: 350px;
+                display: inline-block;
+                height: 54px;
+                text-align: center;
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: 800;
+                letter-spacing: -.5px;
+                word-spacing: 2px;
+                font-size: larger;
 
-        & > div:first-child {
-            font-size: small;
-        }
+                & > div:first-child {
+                    font-size: small;
+                }
+            }
+        } 
     }
 }
 

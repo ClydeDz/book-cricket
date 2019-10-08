@@ -7,5 +7,6 @@ export class GameConstant {
     readonly bookEndingPageNumber: number = 99; // This will be suffixed with a random number from possible runs
     readonly statsRotationTimer: number = 5000; // In milliseconds
     readonly gameResultsTimer: number = 3000; // In milliseconds
+    readonly centralScreenContentTimer: number = 3500; // In milliseconds
     readonly statsWicketNotation: string = "W"; 
 }

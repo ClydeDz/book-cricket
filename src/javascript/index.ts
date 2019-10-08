@@ -10,6 +10,10 @@ $(document).ready(function():void {
     var interval = self.setInterval(function() { 
         displayAPI.infiniteRoll("div.stats-slider>div"); 
     }, gameConstant.statsRotationTimer);
+    
+    var centralScreensTimerInterval = self.setInterval(function() { 
+        displayAPI.infiniteRoll("div.central-screens-slider>div"); 
+    }, gameConstant.centralScreenContentTimer);
 
     $("#flipPageBtn").click(function():void {
         displayAPI.flipPage();

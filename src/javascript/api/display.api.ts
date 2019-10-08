@@ -97,11 +97,13 @@ export class DisplayAPI {
         let gamePanelData = new GamePanel();
 
         if(this.gameplayAPI.didPlayerWin(playerScorecard, cpuScorecard)){
-            this.updateCentralScreensContent("You won", "Congratulations!");
+            let wonByWickets = this.gameConstant.teamSize - playerScorecard.wickets;
+            this.updateCentralScreensContent("You won", "Congratulations!", "You won by", `${wonByWickets} wickets`);
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = true;
         } else {
-            this.updateCentralScreensContent("You lost", "Sorry, try again!");
+            let lostByRuns = cpuScorecard.targetRuns - playerScorecard.runs;
+            this.updateCentralScreensContent("You lost", "Sorry, try again!", "You lost by", `${lostByRuns} runs`);
             gamePanelData.isResultsMode = true;
             gamePanelData.isWinner = false;
         }
@@ -132,7 +134,10 @@ export class DisplayAPI {
         let totalOvers: number = this.computationEngine.ballsToOvers(this.gameConstant.totalBalls);
         let runsDisplayText = cpuScorecard.targetRuns === 1 ? "run" : "runs";
         let overDisplayText = totalOvers === 1 ? "over" : "overs";
-        this.updateCentralScreensContent(`You need to make`, `${cpuScorecard.targetRuns} ${runsDisplayText} in ${totalOvers} ${overDisplayText}`);
+        this.updateCentralScreensContent(`You need to make`,
+            `${cpuScorecard.targetRuns} ${runsDisplayText} in ${totalOvers} ${overDisplayText}`,
+            `Ready?`,
+            `Let's play!`);
     }
 
     updateStatsHeader(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
@@ -173,19 +178,48 @@ export class DisplayAPI {
     }
 
     updateGamePlayArea(runScored: RunScored, playerScorecard: Scorecard): void {
+        let player = playerScorecard.players[playerScorecard.wickets];
         let gamePanelData = new GamePanel();
         gamePanelData.runScored = runScored.actual;
-        gamePanelData.isDuckOut = playerScorecard.players[playerScorecard.wickets].runs === 0 
-                                    && runScored.actual === 0;
+        gamePanelData.isDuckOut = player.runs === 0 && runScored.actual === 0;
+        gamePanelData.isOut = runScored.actual === 0;
+        gamePanelData.isCentury = !(player.runs > 100) && (player.runs + runScored.actual >= 100) && (player.runs - runScored.actual < 100);
+        gamePanelData.isHalfCentury = !(player.runs > 50) && (player.runs + runScored.actual >= 50) && (player.runs - runScored.actual < 50);
 
-        this.updateCentralScreensContent("You flipped", "Page " + runScored.display);
+        let centralScreensSet2Content = this.updateGamePlayAreaHelper(gamePanelData);
+        this.updateCentralScreensContent("You flipped", "Page " + runScored.display, centralScreensSet2Content[0], centralScreensSet2Content[1]);
         this.updateGamePanels(gamePanelData);
     }
 
-    updateCentralScreensContent(firstLine: string, secondLine: string): void {
-        let contentHTML = `<div class='flipInX animated'>${firstLine}</div>
-            <div class='flipInX animated'>${secondLine}</div>`;
-        jQuery("#gamePlayArea .central-screens .central-screens-content").html(contentHTML);
+    updateGamePlayAreaHelper(gamePanel: GamePanel): string[] {
+        if(gamePanel.isDuckOut) {
+            return ["Quack quack!", "Duck out"];
+        }
+        if(gamePanel.isCentury) {
+            return ["Well deserved mate", "What a fine century!"];
+        }
+        if(gamePanel.isHalfCentury) {
+            return ["Fabulous", "A knockout 50"];
+        }
+        if(gamePanel.isOut) {
+            return ["Well played but you're...", "Out"];
+        }
+        return [null, null];
+    }
+
+    updateCentralScreensContent(firstLineSet1: string, secondLineSet1: string, firstLineSet2: string, secondLineSet2: string): void {
+        let set1ContentHTML = `<div class='central-screens-slider'>
+            <div class='flipInX animated active'>
+                <div>${firstLineSet1}</div>
+                <div>${secondLineSet1}</div>
+            </div>`;
+        let set2ContentHTML = !firstLineSet2 && !secondLineSet2 ? `` : 
+            `<div class='flipInX animated'>
+                <div>${firstLineSet2}</div>
+                <div>${secondLineSet2}</div>
+            </div>`;
+        let htmlContent = set1ContentHTML + set2ContentHTML + "</div>";
+        jQuery("#gamePlayArea .central-screens .central-screens-content").html(htmlContent);
     }
 
     updateScorecardFooter(playerScorecard: Scorecard, cpuScorecard: Scorecard): void {
@@ -281,7 +315,7 @@ export class DisplayAPI {
     // Initialize
 
     resetGameResultsArea(): void {
-        this.updateCentralScreensContent("Ready?", "Let's play!");
+        this.updateCentralScreensContent("Ready?", "Let's play!", null, null);
         jQuery("#gameResultsArea #playAgainBtn").hide();
     }
 

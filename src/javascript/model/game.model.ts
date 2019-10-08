@@ -70,4 +70,7 @@ export class GamePanel {
     isDuckOut: boolean = false;
     isResultsMode: boolean = false;
     isWinner: boolean = false;
+    isHalfCentury: boolean = false;
+    isCentury: boolean = false;
+    isOut: boolean = false;
 }

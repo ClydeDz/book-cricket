@@ -6,3 +6,12 @@
         }
     }
 }
+
+#gamePlayArea .central-screens-content .central-screens-slider {
+    & > div {
+        display: none;
+        &.active {
+            display: inline-block;
+        }
+    }
+}
