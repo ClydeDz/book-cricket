@@ -52,22 +52,23 @@ export class GameplayAPI {
     }
 
     getScorePanelImage(gamePanelData: GamePanel): string {
-        let imageIdentifier = this.gameplayEngine.getRandomNumberWithinRange(1,3);
+        let imageIdentifier = this.gameplayEngine.getRandomNumberWithinRange(
+            this.gameConstant.PANELS_STARTING_IMAGE_ID, this.gameConstant.PANELS_ENDING_IMAGE_ID);
         
         if(gamePanelData.isResultsMode && gamePanelData.isWinner){
-            return `victory-${imageIdentifier}`;
+            return `${this.gameConstant.VICTORY_IMAGE_PREFIX}-${imageIdentifier}`;
         }
         if(gamePanelData.isResultsMode && !gamePanelData.isWinner){
-            return `lost-${imageIdentifier}`;
+            return `${this.gameConstant.LOST_IMAGE_PREFIX}-${imageIdentifier}`;
         }
         if(gamePanelData.isDuckOut){
-            return `duckout-${imageIdentifier}`;
+            return `${this.gameConstant.DUCKOUT_IMAGE_PREFIX}-${imageIdentifier}`;
         }
 
-        let imageName = gamePanelData.runScored === 0 ? "out" : 
-            (gamePanelData.runScored === 2 ? "two" :
-                (gamePanelData.runScored === 4 ? "four" : 
-                    (gamePanelData.runScored === 6 ? "six" : "eight")
+        let imageName = gamePanelData.runScored === 0 ? this.gameConstant.OUT_IMAGE_PREFIX : 
+            (gamePanelData.runScored === 2 ? this.gameConstant.TWO_RUNS_IMAGE_PREFIX :
+                (gamePanelData.runScored === 4 ? this.gameConstant.FOUR_RUNS_IMAGE_PREFIX : 
+                    (gamePanelData.runScored === 6 ? this.gameConstant.SIX_RUNS_IMAGE_PREFIX : this.gameConstant.EIGHT_RUNS_IMAGE_PREFIX)
                 )
             );
         return `${imageName}-${imageIdentifier}`;

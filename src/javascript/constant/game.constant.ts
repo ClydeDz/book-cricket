@@ -13,10 +13,20 @@ export class GameConstant {
     readonly GAME_RESULTS_TIMER: number = 3000; // In milliseconds
     readonly CENTRAL_SCREEN_TIMER: number = 3500; // In milliseconds
     readonly STATS_WICKET_NOTATION: string = "W"; 
-    
+
     // IN-STADIUM ELEMENTS
     readonly PANELS_IMAGE_LOCATION: string = "./src/images/assets/panels/"; 
     readonly PANELS_IMAGE_EXTENSION: string = ".gif"; 
+    readonly PANELS_STARTING_IMAGE_ID: number = 1;
+    readonly PANELS_ENDING_IMAGE_ID: number = 3;
+    readonly VICTORY_IMAGE_PREFIX: string = "victory"; 
+    readonly LOST_IMAGE_PREFIX: string = "lost"; 
+    readonly DUCKOUT_IMAGE_PREFIX: string = "duckout"; 
+    readonly OUT_IMAGE_PREFIX: string = "out"; 
+    readonly TWO_RUNS_IMAGE_PREFIX: string = "two"; 
+    readonly FOUR_RUNS_IMAGE_PREFIX: string = "four"; 
+    readonly SIX_RUNS_IMAGE_PREFIX: string = "six"; 
+    readonly EIGHT_RUNS_IMAGE_PREFIX: string = "eight"; 
 
     // SCORECARD
     readonly VIEW_PLAYER_SCORECARD: string = "View Player Scorecard"; 
