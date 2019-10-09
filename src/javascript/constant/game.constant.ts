@@ -21,6 +21,7 @@ export class GameConstant {
     // SCORECARD
     readonly VIEW_PLAYER_SCORECARD: string = "View Player Scorecard"; 
     readonly VIEW_CPU_SCORECARD: string = "View CPU Scorecard"; 
+    readonly STAR_PLAYER_IMAGE_LOCATION: string = "./src/images/icons/star.png"; 
 
     // ADVERTISEMENTS
     readonly ADS_IMAGE_LOCATION: string = "./src/images/assets/ads/ad-"; 

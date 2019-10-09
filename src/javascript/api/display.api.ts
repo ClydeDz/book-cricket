@@ -250,7 +250,7 @@ export class DisplayAPI {
             let player = playerScorecard.players[i];
             let isOnStrike = i === currentBatsman ? `<i>*</i>` : ``;
             let wicketTakenBy = player.wicketTakenBy != "" ? ` (b) ${player.wicketTakenBy}`: "";
-            let starPlayer = player.starBatsman ? `<span class='star-player'><img src='./src/images/icons/star.png' /></span>`
+            let starPlayer = player.starBatsman ? `<span class='star-player'><img src='${this.gameConstant.STAR_PLAYER_IMAGE_LOCATION}' /></span>`
                 : `<span class='star-player'>&nbsp;</span>`;
 
             scorecardPlayerContent += `
@@ -292,7 +292,7 @@ export class DisplayAPI {
         for(let i: number = 0; i < cpuScorecard.players.length; i++){
             let player = cpuScorecard.players[i];
             let isCurrentlyBowling = i === currentOver ? `<i>*</i>` : ``;
-            let starPlayer = player.starBowler ? `<span class='star-player'><img src='./src/images/icons/star.png' /></span>`
+            let starPlayer = player.starBowler ? `<span class='star-player'><img src='${this.gameConstant.STAR_PLAYER_IMAGE_LOCATION}' /></span>`
                 : `<span class='star-player'>&nbsp;</span>`;
 
             scorecardCPUContent += `
