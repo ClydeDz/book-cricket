@@ -126,6 +126,12 @@ export class DisplayAPI {
         if(gamePanelData.isDuckOut) {
             jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="${this.gameConstant.PANELS_IMAGE_LOCATION}${extraScorePanelImage}${this.gameConstant.PANELS_IMAGE_EXTENSION}" />`);        
         }
+        if(gamePanelData.isCentury) {
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="${this.gameConstant.PANELS_IMAGE_LOCATION}${this.gameConstant.CENTURY_IMAGE_PREFIX}${this.gameConstant.PANELS_IMAGE_EXTENSION}" />`);        
+        }
+        if(gamePanelData.isHalfCentury) {
+            jQuery("#gamePlayArea .gpaRunScored.gpaRunScoredExtra").html(`<img src="${this.gameConstant.PANELS_IMAGE_LOCATION}${this.gameConstant.HALFCENTURY_IMAGE_PREFIX}${this.gameConstant.PANELS_IMAGE_EXTENSION}" />`);        
+        }
     }
 
     // UI updates using JQuery

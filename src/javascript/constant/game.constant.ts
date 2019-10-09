@@ -26,7 +26,9 @@ export class GameConstant {
     readonly TWO_RUNS_IMAGE_PREFIX: string = "two"; 
     readonly FOUR_RUNS_IMAGE_PREFIX: string = "four"; 
     readonly SIX_RUNS_IMAGE_PREFIX: string = "six"; 
-    readonly EIGHT_RUNS_IMAGE_PREFIX: string = "eight"; 
+    readonly EIGHT_RUNS_IMAGE_PREFIX: string = "eight";
+    readonly CENTURY_IMAGE_PREFIX: string = "century";  
+    readonly HALFCENTURY_IMAGE_PREFIX: string = "halfcentury"; 
 
     // SCORECARD
     readonly VIEW_PLAYER_SCORECARD: string = "View Player Scorecard"; 
